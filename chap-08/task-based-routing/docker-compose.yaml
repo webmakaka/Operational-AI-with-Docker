@@ -1,0 +1,32 @@
+services:
+  router:
+    build: ./router
+    ports:
+      - "8080:8080"
+    environment:
+      - CODE_MODEL_URL
+      - VISION_MODEL_URL
+      - TEXT_MODEL_URL
+    models:
+      code-model:
+        endpoint_var: CODE_MODEL_URL
+        model_var: CODE_MODEL
+      vision-model:
+        endpoint_var: VISION_MODEL_URL
+        model_var: VISION_MODEL
+      text-model:
+        endpoint_var: TEXT_MODEL_URL
+        model_var: TEXT_MODEL
+
+models:
+  code-model:
+    model: ai/granite-4.0-nano
+    context_size: 4096
+  
+  vision-model:
+    model: ai/smolvlm
+    context_size: 8192
+  
+  text-model:
+    model: ai/qwen3
+    context_size: 8192

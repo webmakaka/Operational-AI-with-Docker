@@ -1,0 +1,25 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  writer:
+    image: python:3.11-slim
+    command: sh -c "pip install redis && python /app/writer.py"
+    volumes:
+      - ./writer.py:/app/writer.py
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+
+  reader:
+    image: python:3.11-slim
+    command: sh -c "pip install redis && python /app/reader.py"
+    volumes:
+      - ./reader.py:/app/reader.py
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis

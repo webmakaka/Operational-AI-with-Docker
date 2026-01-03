@@ -1,0 +1,18 @@
+services:
+  # Secure agent with sandboxing
+  secure-agent:
+    build: .
+    read_only: true  # Filesystem is read-only
+    tmpfs:
+      - /tmp  # Only /tmp is writable
+    cap_drop:
+      - ALL  # Drop all Linux capabilities
+    security_opt:
+      - no-new-privileges:true  # Prevent privilege escalation
+    user: "1000:1000"  # Run as non-root user
+    networks:
+      - isolated-network
+
+networks:
+  isolated-network:
+    internal: true  # No external network access

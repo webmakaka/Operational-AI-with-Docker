@@ -1,0 +1,11 @@
+services:
+  mcp-gateway:
+    image: docker/mcp-gateway
+    command:
+      - --servers=github-official
+      - --servers=slack
+      - --servers=kubernetes
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8811:8811"

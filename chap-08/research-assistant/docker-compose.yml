@@ -1,0 +1,88 @@
+services:
+  coordinator:
+    build: ./coordinator
+    ports:
+      - "8080:8080"
+    environment:
+      - SEARCHER_URL=http://searcher:8081
+      - ANALYZER_URL=http://analyzer:8082
+      - WRITER_URL=http://writer:8083
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - searcher
+      - analyzer
+      - writer
+      - redis
+    models:
+      coordinator-model:
+        endpoint_var: MODEL_URL
+        model_var: MODEL_NAME
+
+  searcher:
+    build: ./searcher
+    expose:
+      - "8081"
+    environment:
+      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    models:
+      searcher-model:
+        endpoint_var: MODEL_URL
+        model_var: MODEL_NAME
+
+  analyzer:
+    build: ./analyzer
+    expose:
+      - "8082"
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    models:
+      analyzer-model:
+        endpoint_var: MODEL_URL
+        model_var: MODEL_NAME
+
+  writer:
+    build: ./writer
+    expose:
+      - "8083"
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    models:
+      writer-model:
+        endpoint_var: MODEL_URL
+        model_var: MODEL_NAME
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+
+models:
+  coordinator-model:
+    model: ai/qwen3
+    context_size: 8192
+
+  searcher-model:
+    model: ai/granite-4.0-nano
+    context_size: 2048
+
+  analyzer-model:
+    model: ai/granite-4.0-micro
+    context_size: 4096
+
+  writer-model:
+    model: ai/granite-4.0-micro
+    context_size: 4096
+
+volumes:
+  redis-data:

@@ -1,0 +1,46 @@
+networks:
+  # Public network - can access internet
+  frontend:
+    driver: bridge
+
+  # Internal network - no internet access
+  backend:
+    driver: bridge
+    internal: true
+
+services:
+  # Frontend agent - has internet access
+  frontend-agent:
+    image: alpine:latest
+    command: sh -c "
+      echo 'Frontend agent starting...' &&
+      echo 'Testing internet access:' &&
+      ping -c 3 8.8.8.8 || echo 'No internet (unexpected)' &&
+      echo 'Frontend agent can access internet!' &&
+      sleep 300
+    "
+    networks:
+      - frontend
+
+  # Backend agent - no internet access
+  backend-agent:
+    image: alpine:latest
+    command: sh -c "
+      echo 'Backend agent starting...' &&
+      echo 'Testing internet access (should fail):' &&
+      ping -c 3 8.8.8.8 || echo 'Internet blocked - internal network working!' &&
+      sleep 300
+    "
+    networks:
+      - backend
+
+  # Database on backend network only
+  database:
+    image: alpine:latest
+    command: sh -c "
+      echo 'Database starting on backend network...' &&
+      echo 'Database cannot be reached from frontend' &&
+      sleep 300
+    "
+    networks:
+      - backend

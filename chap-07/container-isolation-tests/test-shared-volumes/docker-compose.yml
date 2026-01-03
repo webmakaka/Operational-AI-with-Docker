@@ -1,0 +1,37 @@
+services:
+  # Writer agent - creates data files
+  writer-agent:
+    image: alpine:latest
+    command: sh -c "
+      echo 'Writer agent starting...' &&
+      mkdir -p /workspace &&
+      echo 'This is shared data from writer' > /workspace/data.txt &&
+      echo 'Timestamp:' >> /workspace/data.txt &&
+      date >> /workspace/data.txt &&
+      cat /workspace/data.txt &&
+      echo 'Writer sleeping...' &&
+      sleep 300
+    "
+    volumes:
+      - shared-workspace:/workspace
+
+  # Reader agent - reads data (read-only)
+  reader-agent:
+    image: alpine:latest
+    command: sh -c "
+      sleep 5 &&
+      echo 'Reader agent starting...' &&
+      echo 'Reading shared data:' &&
+      cat /workspace/data.txt &&
+      echo '' &&
+      echo 'Attempting to write (should fail):' &&
+      (echo 'test write' > /workspace/test.txt 2>&1 || echo 'Write blocked - read-only mount working!') &&
+      sleep 300
+    "
+    volumes:
+      - shared-workspace:/workspace:ro
+    depends_on:
+      - writer-agent
+
+volumes:
+  shared-workspace:

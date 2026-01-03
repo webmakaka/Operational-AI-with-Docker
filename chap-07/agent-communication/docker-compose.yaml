@@ -1,0 +1,31 @@
+services:
+  # Writer agent - publishes patch events
+  writer:
+    build: .
+    command: python -u writer.py
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # Reader agent - subscribes to patch events
+  reader:
+    build: .
+    command: python -u reader.py
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # Redis for pub/sub
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    ports:
+      - "6379:6379"

@@ -1,0 +1,28 @@
+services:
+  router:
+    build: ./router
+    ports:
+      - "8080:8080"
+    models:
+      small-model:
+        endpoint_var: SMALL_MODEL_URL
+        model_var: SMALL_MODEL
+      medium-model:
+        endpoint_var: MEDIUM_MODEL_URL
+        model_var: MEDIUM_MODEL
+      large-model:
+        endpoint_var: LARGE_MODEL_URL
+        model_var: LARGE_MODEL
+
+models:
+  small-model:
+    model: ai/granite-4.0-nano
+    context_size: 2048
+  
+  medium-model:
+    model: ai/granite-4.0-micro
+    context_size: 4096
+  
+  large-model:
+    model: ai/qwen3
+    context_size: 8192

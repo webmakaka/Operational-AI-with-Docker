@@ -1,0 +1,60 @@
+services:
+  # Agent 1: Bug tracking agent
+  bug-tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    environment:
+      - AGENT_NAME=bug-tracker
+      - AGENT_TYPE=monitoring
+      - REDIS_URL=redis://agent-memory:6379
+    volumes:
+      - bug-tracker-state:/data
+    depends_on:
+      agent-memory:
+        condition: service_healthy
+    models:
+      - llama
+    restart: unless-stopped
+
+  # Agent 2: Status reporter agent
+  status-reporter:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    environment:
+      - AGENT_NAME=status-reporter
+      - AGENT_TYPE=reporting
+      - REDIS_URL=redis://agent-memory:6379
+    volumes:
+      - reporter-state:/data
+    depends_on:
+      agent-memory:
+        condition: service_healthy
+    models:
+      - llama
+    restart: unless-stopped
+
+  # Shared memory
+  agent-memory:
+    image: redis:7-alpine
+    volumes:
+      - shared-memory:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    ports:
+      - "6379:6379"
+
+models:
+  llama:
+    model: llama3.2:1B-Q8_0
+    context_size: 2048
+
+volumes:
+  bug-tracker-state:
+  reporter-state:
+  shared-memory:

@@ -1,0 +1,76 @@
+services:
+  # Agent Controller - manages all agents
+  controller:
+    build:
+      context: .
+      dockerfile: Dockerfile.controller
+    ports:
+      - "8001:8000"  # Map external 8001 to internal 8000
+    environment:
+      - REDIS_URL=redis://agent-memory:6379
+      - CONTROLLER_NAME=main-controller
+    depends_on:
+      agent-memory:
+        condition: service_healthy
+    models:
+      - llm
+
+  # Worker Agent 1 - processes data tasks
+  worker-1:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    environment:
+      - REDIS_URL=redis://agent-memory:6379
+      - AGENT_NAME=worker-1
+      - AGENT_TYPE=data-processor
+      - CONTROLLER_URL=http://controller:8000  # Added this
+    depends_on:
+      agent-memory:
+        condition: service_healthy
+      controller:
+        condition: service_started
+    models:
+      - llm
+    restart: on-failure
+
+  # Worker Agent 2 - processes analysis tasks
+  worker-2:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    environment:
+      - REDIS_URL=redis://agent-memory:6379
+      - AGENT_NAME=worker-2
+      - AGENT_TYPE=analyst
+      - CONTROLLER_URL=http://controller:8000  # Added this
+    depends_on:
+      agent-memory:
+        condition: service_healthy
+      controller:
+        condition: service_started
+    models:
+      - llm
+    restart: on-failure
+
+  # Redis for shared memory
+  agent-memory:
+    image: redis:7-alpine
+    volumes:
+      - agent-state:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    ports:
+      - "6379:6379"
+
+models:
+  llm:
+    model: ai/llama3.2:1B-Q8_0
+    context_size: 2048
+
+volumes:
+  agent-state:

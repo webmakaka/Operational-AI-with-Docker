@@ -1,0 +1,19 @@
+services:
+  # Writer agent - writes to shared volume
+  writer:
+    image: alpine:latest
+    command: sh -c "echo 'Writing test file' && echo 'Hello from writer' > /workspace/test.txt && cat /workspace/test.txt && sleep 300"
+    volumes:
+      - shared-workspace:/workspace
+
+  # Reader agent - read-only access
+  reader:
+    image: alpine:latest
+    command: sh -c "sleep 5 && echo 'Reading test file' && cat /workspace/test.txt && echo 'Trying to write...' && (echo 'Should fail' > /workspace/readonly-test.txt || echo 'Write blocked as expected') && sleep 300"
+    volumes:
+      - shared-workspace:/workspace:ro
+    depends_on:
+      - writer
+
+volumes:
+  shared-workspace:

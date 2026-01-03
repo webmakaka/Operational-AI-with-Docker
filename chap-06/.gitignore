@@ -1,0 +1,69 @@
+# Environment files with secrets
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+
+# Secret files
+*_secret
+*_secrets
+postgres_url
+!postgres_url.example
+secrets/
+credentials/
+
+# MCP local configuration
+.docker/mcp/
+**/config.yaml
+!**/*.example
+!**/config.yaml.example
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Data
+data/
+*.db
+*.sqlite
+
+# Monitoring data
+prometheus-data/
+grafana-data/

@@ -1,0 +1,39 @@
+services:
+  # Agent that processes tasks and remembers what it's done
+  task-agent:
+    build: .
+    environment:
+      - REDIS_URL=redis://agent-memory:6379
+      - AGENT_NAME=task-processor
+    depends_on:
+      agent-memory:
+        condition: service_healthy
+    models:
+      llm:
+        endpoint_var: AI_MODEL_URL
+        model_var: AI_MODEL_NAME
+
+  # Redis for persistent agent memory
+  agent-memory:
+    image: redis:7-alpine
+    volumes:
+      - agent-state:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    ports:
+      - "6379:6379"
+
+models:
+  llm:
+    model: llama3.2:1B-Q8_0
+    context_size: 2048
+    runtime_flags:
+      - "--temp"
+      - "0.7"
+
+volumes:
+  agent-state:

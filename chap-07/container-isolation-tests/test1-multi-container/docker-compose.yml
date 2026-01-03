@@ -1,0 +1,26 @@
+services:
+  # Simple test agent 1
+  agent-1:
+    image: alpine:latest
+    command: sh -c "echo 'Agent 1 starting' && sleep 300"
+    environment:
+      - AGENT_NAME=agent-1
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    restart: unless-stopped
+
+  # Simple test agent 2
+  agent-2:
+    image: alpine:latest
+    command: sh -c "echo 'Agent 2 starting' && sleep 300"
+    environment:
+      - AGENT_NAME=agent-2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    restart: unless-stopped

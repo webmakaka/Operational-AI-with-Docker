@@ -1,0 +1,46 @@
+services:
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  agent-upload:
+    image: python:3.11-slim
+    command: sh -c "pip install boto3 && python /app/upload.py"
+    volumes:
+      - ./upload.py:/app/upload.py
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      - S3_ENDPOINT=http://minio:9000
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+
+  agent-download:
+    image: python:3.11-slim
+    command: sh -c "sleep 10 && pip install boto3 && python /app/download.py"
+    volumes:
+      - ./download.py:/app/download.py
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      - S3_ENDPOINT=http://minio:9000
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+
+volumes:
+  minio-data:

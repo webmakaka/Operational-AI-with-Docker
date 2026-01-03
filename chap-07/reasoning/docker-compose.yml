@@ -1,0 +1,22 @@
+services:
+  node-genai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    environment:
+      - PORT=8080
+    models:
+      - llama
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+models:
+  llama:
+    model: ai/llama3.2:1B-Q8_0
+    context_size: 2048

@@ -1,0 +1,18 @@
+services:
+  # Coordinator - discovers workers by service name
+  coordinator:
+    build:
+      context: .
+      dockerfile: Dockerfile.coordinator
+    environment:
+      - WORKER_URL=http://worker:8000
+    depends_on:
+      - worker
+
+  # Worker - scaled dynamically
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    deploy:
+      replicas: 1
