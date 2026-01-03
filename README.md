@@ -22,7 +22,6 @@ This book covers the following exciting features:
 * Implement enterprise security patterns for AI deployments
 * Automate AI workflows with Docker Compose and orchestration
 
-If you feel this book is for you, get your [copy](https://www.amazon.com/) today!
 
 ## Instructions and Navigations
 
