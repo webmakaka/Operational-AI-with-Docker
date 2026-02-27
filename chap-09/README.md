@@ -1,8 +1,5 @@
 # Chapter 9: Advanced Agent Orchestration
 
-Code for Chapter 9 of *Operational AI with Docker*.
-
-Three tools covered: Docker Sandboxes, cagent, and kagent.
 
 ## What you need
 
