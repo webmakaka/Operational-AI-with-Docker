@@ -1,0 +1,9 @@
+name: code-analyst
+model: openai/gpt-4.1-mini
+description: Analyzes code to identify bug locations
+instructions: |
+  Read the codebase and identify the root cause of bugs.
+  Report file names, line numbers, and explanations.
+tools:
+  - filesystem
+  - shell

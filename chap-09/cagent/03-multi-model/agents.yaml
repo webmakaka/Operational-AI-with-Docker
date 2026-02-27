@@ -1,0 +1,17 @@
+agents:
+  quick-classifier:
+    model: openai/gpt-4.1-mini
+    description: Fast triage of incoming requests
+    instructions: |
+      Classify incoming requests as: bug, feature, question, or other.
+      Be fast and concise.
+
+  deep-analyzer:
+    model: anthropic/claude-sonnet-4-20250514
+    description: Deep analysis of complex issues
+    instructions: |
+      Perform thorough analysis of technical issues.
+      Consider edge cases, security implications, and performance.
+    tools:
+      - think
+      - filesystem

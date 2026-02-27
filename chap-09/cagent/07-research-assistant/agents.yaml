@@ -1,0 +1,13 @@
+name: research-assistant
+model: openai/gpt-4.1-mini
+description: Researches topics using web search and GitHub
+instructions: |
+  Research the given topic thoroughly.
+  Search the web for recent information.
+  Check GitHub for relevant repositories and code.
+tools:
+  - think
+  - memory
+toolsets:
+  - docker:duckduckgo
+  - docker:github-official

@@ -1,0 +1,44 @@
+apiVersion: kagent.ai/v1
+kind: Agent
+metadata:
+  name: ops-coordinator
+spec:
+  description: "Coordinates DevOps troubleshooting"
+  systemPrompt: |
+    You coordinate troubleshooting across specialized agents.
+    Delegate log analysis to log-analyzer.
+    Delegate metrics investigation to metrics-checker.
+    Synthesize findings into actionable recommendations.
+  modelConfigRef:
+    name: claude-sonnet-config
+  subAgents:
+    - name: log-analyzer
+    - name: metrics-checker
+---
+apiVersion: kagent.ai/v1
+kind: Agent
+metadata:
+  name: log-analyzer
+spec:
+  description: "Analyzes Kubernetes logs for issues"
+  systemPrompt: |
+    Analyze Kubernetes pod logs to identify errors,
+    warnings, and anomalies. Report findings concisely.
+  modelConfigRef:
+    name: gpt4-mini-config
+  tools:
+    - name: k8s-logs
+---
+apiVersion: kagent.ai/v1
+kind: Agent
+metadata:
+  name: metrics-checker
+spec:
+  description: "Checks cluster metrics and resource usage"
+  systemPrompt: |
+    Monitor Kubernetes cluster metrics including CPU,
+    memory, and network usage. Identify resource bottlenecks.
+  modelConfigRef:
+    name: gpt4-mini-config
+  tools:
+    - name: prometheus-query

@@ -1,0 +1,12 @@
+models:
+  local-llm:
+    provider: docker
+    model: ai/llama3.2:3B-Q8_0
+
+agents:
+  local-agent:
+    model: local-llm
+    description: Runs entirely on local hardware
+    instructions: Analyze files in the current directory.
+    tools:
+      - filesystem

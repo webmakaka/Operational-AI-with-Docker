@@ -1,0 +1,25 @@
+apiVersion: kagent.ai/v1
+kind: Agent
+metadata:
+  name: devops-assistant
+  namespace: kagent
+spec:
+  description: "Kubernetes DevOps assistant"
+  systemPrompt: |
+    You are a DevOps expert. Help with Kubernetes
+    troubleshooting, deployment issues, and infrastructure
+    questions. Be concise and practical.
+  modelConfigRef:
+    name: gpt4-config
+---
+apiVersion: kagent.ai/v1
+kind: ModelConfig
+metadata:
+  name: gpt4-config
+  namespace: kagent
+spec:
+  provider: openai
+  model: gpt-4.1-mini
+  apiKeySecretRef:
+    name: openai-secret
+    key: api-key

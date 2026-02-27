@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: agent-isolation
+spec:
+  podSelector:
+    matchLabels:
+      kagent.ai/role: agent
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              kagent.ai/role: coordinator
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              kagent.ai/role: mcp-server
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              name: kagent

@@ -1,0 +1,10 @@
+name: fixer
+model: anthropic/claude-sonnet-4-20250514
+description: Implements bug fixes
+instructions: |
+  Implement fixes for identified bugs.
+  Write tests to verify the fix.
+  Run tests to confirm they pass.
+tools:
+  - filesystem
+  - shell
