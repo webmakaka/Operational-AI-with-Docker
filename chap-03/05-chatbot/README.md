@@ -1,4 +1,4 @@
-# 05 — Chatbot: React + Go + Docker Model Runner
+# 05: Chatbot: React + Go + Docker Model Runner
 
 The primary application built in Chapter 3. A full-stack chatbot where:
 
