@@ -1,4 +1,4 @@
-# 04 — Model configuration
+# 04: Model configuration
 
 Shows `context_size` and `runtime_flags` in the `models:` section.
 
