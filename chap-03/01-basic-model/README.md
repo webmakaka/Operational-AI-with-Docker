@@ -1,4 +1,4 @@
-# 01 — Basic model binding
+# 01: Basic model binding
 
 Demonstrates the minimal Compose `models:` syntax.
 
