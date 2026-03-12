@@ -1,0 +1,46 @@
+# hpa.yaml — Horizontal Pod Autoscaler for the Go backend.
+#
+# Watches CPU utilisation across all go-backend Pods. When average usage
+# exceeds 70%, adds a replica (up to maxReplicas: 5). When it drops, removes
+# replicas after a cooldown to prevent flapping.
+#
+# ML-specific note: Do NOT autoscale Docker Model Runner with CPU thresholds —
+# model loading takes 60-90s, so new replicas can't respond fast enough to
+# a spike. Instead, set minReplicas: 2 on the DMR Deployment to keep a warm
+# second replica running at all times.
+#
+# Prerequisites:
+#   metrics-server must be running (Docker Desktop kind includes it).
+#   Verify: kubectl get deployment metrics-server -n kube-system
+#
+# Apply:  kubectl apply -f hpa.yaml
+# Status: kubectl get hpa -n ai-app
+# Watch:  kubectl get hpa -n ai-app --watch
+#
+# Load test (run in a separate terminal to trigger scaling):
+#   kubectl run load-generator \
+#     --image=busybox \
+#     --namespace=ai-app \
+#     -- /bin/sh -c "while true; do wget -q -O- http://go-backend:8080/health; done"
+#
+# Cleanup load generator:
+#   kubectl delete pod load-generator -n ai-app
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: backend-hpa
+  namespace: ai-app
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: go-backend
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70

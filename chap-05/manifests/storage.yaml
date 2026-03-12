@@ -1,0 +1,17 @@
+# storage.yaml — PersistentVolumeClaim for Docker Model Runner model files.
+#
+# Without this, the model re-downloads from Docker Hub on every Pod restart.
+# 5Gi is sufficient for most quantised models (Q4/Q5 variants of 7B models).
+#
+# Apply: kubectl apply -f storage.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-storage
+  namespace: ai-app
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

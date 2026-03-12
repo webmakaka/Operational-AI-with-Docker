@@ -1,0 +1,77 @@
+# backend-deployment.yaml — Go backend Deployment + Service.
+#
+# The Go backend calls Docker Model Runner at:
+#   http://docker-model-runner:8080/engines/v1/chat/completions
+# — the Service name resolves via Kubernetes internal DNS.
+#
+# In Chapter 3 (Compose), the backend reached DMR at:
+#   http://model-runner.docker.internal/engines/v1
+# In Kubernetes, the Service name replaces that special Docker DNS name.
+#
+# The Secret reference injects ANTHROPIC_API_KEY from app-secrets.
+#
+# Apply: kubectl apply -f backend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-backend
+  namespace: ai-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-backend
+  template:
+    metadata:
+      labels:
+        app: go-backend
+    spec:
+      containers:
+        - name: go-backend
+          image: go-backend:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: LLM_URL
+              value: "http://docker-model-runner:8080/engines/v1"
+            - name: LLM_MODEL
+              valueFrom:
+                configMapKeyRef:
+                  name: dmr-config
+                  key: MODEL_NAME
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: ANTHROPIC_API_KEY
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 15
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-backend
+  namespace: ai-app
+spec:
+  selector:
+    app: go-backend
+  ports:
+    - port: 8080
+      targetPort: 8080
