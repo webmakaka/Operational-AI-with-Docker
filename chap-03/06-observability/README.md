@@ -1,4 +1,4 @@
-# 06 — Observability: Prometheus + Grafana + Jaeger
+# 06: Observability: Prometheus + Grafana + Jaeger
 
 Extends the Chapter 3 chatbot with a full observability stack.
 
