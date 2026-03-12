@@ -1,4 +1,4 @@
-# 02 — Multiple models per service
+# 02: Multiple models per service
 
 Binds two models to one service: a chat LLM and an embedding model.
 
