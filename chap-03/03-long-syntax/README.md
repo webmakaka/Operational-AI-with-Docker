@@ -1,4 +1,4 @@
-# 03 — Long syntax with custom env var names
+# 03: Long syntax with custom env var names
 
 The long syntax lets you override the default variable names Compose injects.
 
