@@ -1,6 +1,6 @@
 # Chapter 3: Model Serving with Docker Model Runner
 
-Code examples for Chapter 3 of *Operational AI with Docker* (Packt).
+Code examples for Chapter 3 
 
 ## Structure
 
