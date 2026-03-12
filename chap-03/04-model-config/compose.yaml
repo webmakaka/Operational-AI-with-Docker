@@ -1,0 +1,47 @@
+# Model configuration — context_size and runtime_flags.
+#
+# context_size: maximum token context the model will use.
+#   Larger values use more RAM. Only set what you actually need.
+#
+# runtime_flags: passed directly to llama.cpp (or vLLM).
+#   Equivalent to: docker model configure --threads 8 --temp 0.7 ai/smollm2
+
+services:
+  app:
+    image: my-app:latest
+    models:
+      - llm
+
+models:
+  # Example 1: context_size only
+  llm:
+    model: ai/smollm2
+    context_size: 4096
+
+---
+# Example 2: runtime_flags (sampling parameters)
+# Uncomment to use instead of Example 1
+
+# models:
+#   llm:
+#     model: ai/smollm2
+#     runtime_flags:
+#       - "--threads"
+#       - "8"
+#       - "--temp"
+#       - "0.7"
+#       - "--top-p"
+#       - "0.9"
+
+---
+# Example 3: code assistant — large context + tuned flags
+# (ai/qwen2.5-coder supports up to 8k tokens)
+
+# models:
+#   llm:
+#     model: ai/qwen2.5-coder
+#     context_size: 8192
+#     runtime_flags:
+#       - "--no-prefill-assistant"
+#       - "--threads"
+#       - "16"

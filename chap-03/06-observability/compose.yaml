@@ -1,0 +1,53 @@
+# Observability stack for Docker Model Runner.
+# Adds Prometheus, Grafana, and Jaeger alongside the chatbot backend.
+#
+# Usage:
+#   docker compose up
+#
+# Dashboards:
+#   App:        http://localhost:8080
+#   Prometheus: http://localhost:9090
+#   Grafana:    http://localhost:3001  (admin / admin)
+#   Jaeger:     http://localhost:16686
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      - PROMETHEUS_PORT=9100
+      - JAEGER_ENDPOINT=http://jaeger:4318/v1/traces
+    models:
+      - llm
+
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+
+  grafana:
+    image: grafana/grafana:10.4.0
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.57
+    ports:
+      - "16686:16686"   # Jaeger UI
+      - "4318:4318"     # OTLP HTTP receiver
+
+models:
+  llm:
+    model: ai/smollm2

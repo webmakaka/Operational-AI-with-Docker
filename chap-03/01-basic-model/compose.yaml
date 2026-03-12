@@ -1,0 +1,21 @@
+# Basic model binding — a single service referencing one LLM.
+# Docker Compose injects LLM_URL and LLM_MODEL into the container.
+#
+# Usage:
+#   docker compose up
+#
+# The chat-app container will receive:
+#   LLM_URL=http://model-runner.docker.internal/engines/v1
+#   LLM_MODEL=ai/smollm2:360M-Q4_K_M
+
+services:
+  chat-app:
+    image: my-chat-app:latest
+    ports:
+      - "3000:3000"
+    models:
+      - llm   # reference to the model defined below
+
+models:
+  llm:
+    model: ai/smollm2:360M-Q4_K_M

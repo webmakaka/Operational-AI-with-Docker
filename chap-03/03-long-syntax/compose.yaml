@@ -1,0 +1,23 @@
+# Long syntax — custom environment variable names for each model binding.
+# Use when the default LLM_* / EMBEDDING_MODEL_* names conflict with
+# existing env vars in your application.
+
+services:
+  app:
+    image: my-app:latest
+    ports:
+      - "3000:3000"
+    models:
+      llm:
+        endpoint_var: AI_MODEL_URL    # instead of LLM_URL
+        model_var:    AI_MODEL_NAME   # instead of LLM_MODEL
+      embedding-model:
+        endpoint_var: EMBEDDING_URL   # instead of EMBEDDING_MODEL_URL
+        model_var:    EMBEDDING_NAME  # instead of EMBEDDING_MODEL_MODEL
+
+models:
+  llm:
+    model: ai/smollm2
+
+  embedding-model:
+    model: ai/all-minilm

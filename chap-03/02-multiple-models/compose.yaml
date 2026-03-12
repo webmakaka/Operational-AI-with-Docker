@@ -1,0 +1,21 @@
+# Multiple models per service — one LLM for chat, one embedding model.
+#
+# Injected env vars (uppercase prefix matches the model reference name):
+#   LLM_URL           / LLM_MODEL
+#   EMBEDDING_MODEL_URL / EMBEDDING_MODEL_MODEL
+
+services:
+  app:
+    image: my-app:latest
+    ports:
+      - "3000:3000"
+    models:
+      - llm
+      - embedding-model
+
+models:
+  llm:
+    model: ai/smollm2:360M-Q4_K_M
+
+  embedding-model:
+    model: ai/all-minilm

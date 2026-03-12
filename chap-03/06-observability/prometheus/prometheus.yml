@@ -1,0 +1,10 @@
+# Prometheus configuration for the Chapter 3 observability stack.
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "chatbot-backend"
+    static_configs:
+      - targets: ["backend:9100"]
+    metrics_path: /metrics

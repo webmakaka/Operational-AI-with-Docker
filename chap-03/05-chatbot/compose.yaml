@@ -1,0 +1,30 @@
+# The Chapter 3 chatbot: React frontend + Go backend + Docker Model Runner.
+#
+# This is the application migrated to Kubernetes in Chapter 5.
+#
+# Docker Compose injects into the backend container:
+#   LLM_URL=http://model-runner.docker.internal/engines/v1
+#   LLM_MODEL=ai/smollm2
+#
+# Access the chatbot at http://localhost:3000
+
+services:
+  react-frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8080
+    depends_on:
+      - go-backend
+
+  go-backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    models:
+      - llm
+
+models:
+  llm:
+    model: ai/smollm2
