@@ -26,10 +26,6 @@ chap-03/
 ```bash
 # Pull the model used in most examples
 docker model pull ai/smollm2:360M-Q4_K_M
-
-# Run the chatbot (section 05)
-cd 05-chatbot
-docker compose up
 ```
 
 See the chapter for full walkthrough.
