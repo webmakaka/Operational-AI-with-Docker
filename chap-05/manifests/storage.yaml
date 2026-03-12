@@ -1,7 +1,8 @@
 # storage.yaml — PersistentVolumeClaim for Docker Model Runner model files.
 #
-# Without this, the model re-downloads from Docker Hub on every Pod restart.
-# 5Gi is sufficient for most quantised models (Q4/Q5 variants of 7B models).
+# On Docker Desktop kind clusters, the PVC will remain Pending until a Pod
+# mounts it — this is normal behaviour (late binding). It becomes Bound
+# the moment the DMR Pod starts and mounts it.
 #
 # Apply: kubectl apply -f storage.yaml
 apiVersion: v1

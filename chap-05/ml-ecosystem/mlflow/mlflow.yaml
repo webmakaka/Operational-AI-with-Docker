@@ -1,17 +1,8 @@
 # mlflow.yaml — MLflow Tracking server Deployment + Service.
 #
-# Runs the MLflow server on port 5000, accessible inside the cluster at
-# http://mlflow:5000. Training scripts (from RayJobs, Kubeflow steps, or
-# standalone Pods) point mlflow.set_tracking_uri() at this address.
-#
-# Note: This configuration uses in-container storage for the artifact store.
-# For production, mount a PVC and configure --backend-store-uri to point at
-# a persistent database (PostgreSQL) and --default-artifact-root to an
-# S3-compatible bucket.
-#
-# Apply:   kubectl apply -f mlflow.yaml
-# UI:      kubectl port-forward svc/mlflow 5000:5000 -n ai-app
-#          open http://localhost:5000
+# Apply: kubectl apply -f mlflow.yaml
+# UI:    kubectl port-forward svc/mlflow 5000:5000 -n ai-app
+#        open http://localhost:5000
 apiVersion: apps/v1
 kind: Deployment
 metadata:

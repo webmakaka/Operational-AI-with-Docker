@@ -1,27 +1,13 @@
 # hello-ray.yaml — Minimal RayJob to verify KubeRay is working.
 #
-# This job starts a Ray cluster with one head node and two workers,
-# runs a Python one-liner that prints the cluster resources, then
-# cleans up all Pods automatically on completion.
-#
-# Prerequisites — install KubeRay operator first:
+# Install operator first:
 #   helm repo add kuberay https://ray-project.github.io/kuberay-helm/
 #   helm repo update
 #   helm install kuberay-operator kuberay/kuberay-operator \
-#     --namespace kuberay-system \
-#     --create-namespace
+#     --namespace kuberay-system --create-namespace
 #
-# Verify operator is running:
-#   kubectl get pods -n kuberay-system
-#
-# Apply:  kubectl apply -f hello-ray.yaml
-# Watch:  kubectl get rayjob hello-ray -n ai-app --watch
-#
-# Expected output:
-#   NAME        STATUS    AGE
-#   hello-ray   PENDING   5s
-#   hello-ray   RUNNING   18s
-#   hello-ray   COMPLETE  42s
+# Apply: kubectl apply -f hello-ray.yaml
+# Watch: kubectl get rayjob hello-ray -n ai-app --watch
 apiVersion: ray.io/v1
 kind: RayJob
 metadata:

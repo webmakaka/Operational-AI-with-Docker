@@ -1,11 +1,13 @@
 # frontend-deployment.yaml — React frontend Deployment + Service.
 #
-# The frontend is a static React app served by nginx on port 3000.
-# It calls the go-backend Service at http://go-backend:8080 for chat requests.
+# The React app calls localhost:8080 for the backend (baked in at build time).
+# You must run a port-forward for the go-backend Service alongside the frontend:
+#   kubectl port-forward svc/go-backend 8080:8080 -n ai-app &
+#   kubectl port-forward svc/react-frontend 3000:3000 -n ai-app &
 #
-# Access externally via port-forward:
-#   kubectl port-forward svc/react-frontend 3000:3000 -n ai-app
-#   open http://localhost:3000
+# imagePullPolicy: Never — required for locally built images on Docker Desktop
+# kind clusters. Load the image first:
+#   docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
 #
 # Apply: kubectl apply -f frontend-deployment.yaml
 apiVersion: apps/v1
@@ -26,11 +28,9 @@ spec:
       containers:
         - name: react-frontend
           image: react-frontend:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 3000
-          env:
-            - name: REACT_APP_BACKEND_URL
-              value: "http://go-backend:8080"
           resources:
             requests:
               memory: "64Mi"

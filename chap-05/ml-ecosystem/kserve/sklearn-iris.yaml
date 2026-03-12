@@ -1,30 +1,14 @@
 # sklearn-iris.yaml — Minimal KServe InferenceService.
 #
-# KServe manages the full serving lifecycle with a single YAML object:
-# - Pulls the model from the storageUri
-# - Scales Pods based on request volume (including scale-to-zero)
-# - Exposes a standardised prediction endpoint
-# - Supports canary deployments for gradual model rollouts
-#
-# Prerequisites — install cert-manager and KServe:
-#
-#   # 1. Install cert-manager (KServe dependency)
+# Install:
 #   kubectl apply -f \
 #     https://github.com/cert-manager/cert-manager/releases/download/v1.15.0/cert-manager.yaml
-#
-#   kubectl wait --for=condition=Ready pods --all \
-#     -n cert-manager --timeout=120s
-#
-#   # 2. Install KServe
+#   kubectl wait --for=condition=Ready pods --all -n cert-manager --timeout=120s
 #   kubectl apply -f \
 #     https://github.com/kserve/kserve/releases/download/v0.13.0/kserve.yaml
 #
 # Apply:  kubectl apply -f sklearn-iris.yaml
-# Status: kubectl get inferenceservice sklearn-iris -n ai-app
-#
-# Expected output once ready:
-#   NAME           URL                               READY   PREV   LATEST   AGE
-#   sklearn-iris   http://sklearn-iris.ai-app.svc... True           100      45s
+# Status: kubectl get inferenceservice sklearn-iris -n ai-app --watch
 apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
 metadata:

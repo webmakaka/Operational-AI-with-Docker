@@ -1,25 +1,14 @@
 # dmr-deployment.yaml — Docker Model Runner Deployment + Service.
 #
-# Key decisions explained:
+# IMPORTANT: The containerised DMR listens on port 12434 (not 8080).
 #
-# resources.requests: The minimum the scheduler guarantees. Set to the
-#   model's actual loaded size (measure with: kubectl top pod -n ai-app).
-#   If no node has this capacity, the Pod stays Pending indefinitely.
+# On Docker Desktop kind clusters, the Go backend calls the HOST DMR at
+# http://host.docker.internal:12434 rather than this in-cluster Service.
+# See backend-deployment.yaml for details.
 #
-# resources.limits: The hard ceiling. Exceeding memory kills the container
-#   (OOMKilled). Exceeding CPU throttles it but lets it keep running.
-#
-# readinessProbe: Uses /v1/models — DMR's model list endpoint. This returns
-#   HTTP 200 ONLY when a model is loaded and ready to serve requests. Much
-#   more precise than /health, which returns 200 the moment the HTTP server
-#   starts (long before the model is ready).
-#
-# livenessProbe: Uses /health. More conservative timing than readiness —
-#   the container should be alive long before it needs to be restarted.
-#
-# initialDelaySeconds: The most common misconfiguration on first ML deploys.
-#   Too short (e.g. 10s) → probe fires while model is loading → 503 → 
-#   CrashLoopBackOff. Set to actual measured load time + 20s buffer.
+# Readiness probe uses /v1/models — returns 200 only when a model is loaded.
+# Liveness probe uses /health — returns 200 when the HTTP server is running.
+# initialDelaySeconds: 60/120 — model containers need time to load before probes fire.
 #
 # Apply: kubectl apply -f dmr-deployment.yaml
 apiVersion: apps/v1
@@ -41,7 +30,7 @@ spec:
         - name: model-runner
           image: docker/model-runner:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 12434
           envFrom:
             - configMapRef:
                 name: dmr-config
@@ -51,22 +40,22 @@ spec:
           resources:
             requests:
               memory: "4Gi"
-              cpu: "1000m"   # 1000 millicores = 1 full CPU core
+              cpu: "1000m"
             limits:
               memory: "8Gi"
-              cpu: "4000m"   # 4 CPU cores maximum during inference
+              cpu: "4000m"
           readinessProbe:
             httpGet:
-              path: /v1/models   # Returns 200 only when a model is loaded
-              port: 8080
-            initialDelaySeconds: 60   # Wait before first probe — model is loading
+              path: /v1/models
+              port: 12434
+            initialDelaySeconds: 60
             periodSeconds: 10
-            failureThreshold: 6       # 60s of tolerance after initial delay
+            failureThreshold: 6
           livenessProbe:
             httpGet:
               path: /health
-              port: 8080
-            initialDelaySeconds: 120  # Even more conservative for liveness
+              port: 12434
+            initialDelaySeconds: 120
             periodSeconds: 30
             failureThreshold: 3
       volumes:
@@ -74,9 +63,6 @@ spec:
           persistentVolumeClaim:
             claimName: model-storage
 ---
-# Service — exposes DMR at http://docker-model-runner:8080 inside the cluster.
-# The go-backend calls this URL for inference requests.
-# selector.app must match template.metadata.labels.app above.
 apiVersion: v1
 kind: Service
 metadata:
@@ -86,5 +72,5 @@ spec:
   selector:
     app: docker-model-runner
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 12434
+      targetPort: 12434

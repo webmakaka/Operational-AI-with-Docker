@@ -1,14 +1,15 @@
 # backend-deployment.yaml — Go backend Deployment + Service.
 #
-# The Go backend calls Docker Model Runner at:
-#   http://docker-model-runner:8080/engines/v1/chat/completions
-# — the Service name resolves via Kubernetes internal DNS.
+# LLM_URL points to the HOST Docker Model Runner via host.docker.internal:12434.
+# This is the correct approach for Docker Desktop kind clusters — models are
+# managed on the host with `docker model pull` and served from there.
 #
-# In Chapter 3 (Compose), the backend reached DMR at:
-#   http://model-runner.docker.internal/engines/v1
-# In Kubernetes, the Service name replaces that special Docker DNS name.
+# For cloud Kubernetes clusters, change LLM_URL to the in-cluster Service:
+#   value: "http://docker-model-runner:12434/engines/v1"
 #
-# The Secret reference injects ANTHROPIC_API_KEY from app-secrets.
+# imagePullPolicy: Never — required for locally built images on Docker Desktop
+# kind clusters. Load the image first:
+#   docker save go-backend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
 #
 # Apply: kubectl apply -f backend-deployment.yaml
 apiVersion: apps/v1
@@ -29,11 +30,12 @@ spec:
       containers:
         - name: go-backend
           image: go-backend:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
           env:
             - name: LLM_URL
-              value: "http://docker-model-runner:8080/engines/v1"
+              value: "http://host.docker.internal:12434/engines/v1"
             - name: LLM_MODEL
               valueFrom:
                 configMapKeyRef:

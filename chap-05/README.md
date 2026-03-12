@@ -1,6 +1,6 @@
 # Chapter 5: Running ML Container Models on Kubernetes
 
-Code examples for Chapter 5 
+Code examples for Chapter 5 of *Operational AI with Docker* (Packt).
 
 ## Structure
 
@@ -31,23 +31,64 @@ chap-05/
 - Docker Desktop 4.38 or later
 - Kubernetes enabled via Settings → Kubernetes → kind (2 worker nodes)
 - `kubectl` available (`kubectl version --client`)
+- Docker Model Runner enabled in Docker Desktop with TCP port 12434
+- A model pulled on the host: `docker model pull ai/smollm2:360M-Q4_K_M`
+
+## Important: Docker Desktop kind cluster notes
+
+When using Docker Desktop's built-in kind cluster, locally built images must
+be loaded into the worker node's container runtime. The setup script handles
+this automatically, but if you rebuild images you'll need to reload them:
+
+```bash
+docker save go-backend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
+docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
+```
 
 ## Quick start
 
 ```bash
-# 1. Create the namespace
+# 1. Pull the model on the host (required)
+docker model pull ai/smollm2:360M-Q4_K_M
+
+# 2. Build the application images from the Chapter 3 chatbot
+docker build -t go-backend:latest ../chap-03/05-chatbot/backend/
+docker build -t react-frontend:latest ../chap-03/05-chatbot/frontend/
+
+# 3. Load images into the kind worker node
+docker save go-backend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
+docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
+
+# 4. Create the namespace
 kubectl create namespace ai-app
 
-# 2. Deploy everything
+# 5. Deploy everything
 kubectl apply -f manifests/
 
-# 3. Watch deployments become ready (DMR takes ~60-90s)
+# 6. Watch deployments become ready
 kubectl get deployments -n ai-app --watch
 
-# 4. Access the chatbot
-kubectl port-forward svc/react-frontend 3000:3000 -n ai-app
+# 7. Access the chatbot (run in separate terminals)
+kubectl port-forward svc/react-frontend 3000:3000 -n ai-app &
+kubectl port-forward svc/go-backend 8080:8080 -n ai-app &
 # Open http://localhost:3000
 
-# 5. Clean up when done
+# 8. Clean up when done
 kubectl delete namespace ai-app
 ```
+
+## Architecture note: DMR on Kubernetes
+
+The `docker/model-runner` container runs the DMR HTTP server inside the
+cluster on port 12434. For local development with Docker Desktop kind,
+the Go backend calls the **host DMR** at `http://host.docker.internal:12434`
+— the same DMR instance that serves models via `docker model run` on your Mac.
+
+This means:
+- Models are managed with `docker model pull` on the host as usual
+- The in-cluster application accesses them via `host.docker.internal:12434`
+- The PVC (`model-storage`) is included for future use when in-cluster model
+  pulling is fully supported
+
+For cloud Kubernetes clusters, change `LLM_URL` in `backend-deployment.yaml`
+to point at the in-cluster Service: `http://docker-model-runner:12434/engines/v1`
