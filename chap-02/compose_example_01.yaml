@@ -1,0 +1,5 @@
+# Reference only. No demo in Chapter 2; Compose demo in Chapter 3.
+services:
+  app:
+    build: .
+    models:
