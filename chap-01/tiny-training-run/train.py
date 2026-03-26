@@ -12,4 +12,8 @@ model = LogisticRegression(max_iter=200)
 model.fit(X_train, y_train)
 
 pred = model.predict(X_test)
-print(f"accuracy={accuracy_score(y_test, pred):.3f}")
+accuracy = accuracy_score(y_test, pred)
+print(f"accuracy={accuracy:.3f}")
+
+with open("/artifacts/metrics.txt", "w") as f:
+    f.write(f"accuracy={accuracy:.3f}\n")
