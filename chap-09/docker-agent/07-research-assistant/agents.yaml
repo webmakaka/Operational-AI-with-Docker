@@ -1,13 +1,16 @@
-name: research-assistant
-model: openai/gpt-4.1-mini
-description: Researches topics using web search and GitHub
-instructions: |
-  Research the given topic thoroughly.
-  Search the web for recent information.
-  Check GitHub for relevant repositories and code.
-tools:
-  - think
-  - memory
-toolsets:
-  - docker:duckduckgo
-  - docker:github-official
+agents:
+  root:
+    model: openai/gpt-4.1-mini
+    description: Researches topics using web search and GitHub
+    instruction: |
+      Research the given topic thoroughly.
+      Search the web for recent information.
+      Check GitHub for relevant repositories and code.
+    toolsets:
+      - type: think
+      - type: memory
+        path: ./research-memory.db
+      - type: mcp
+        ref: docker:duckduckgo
+      - type: mcp
+        ref: docker:github-official
