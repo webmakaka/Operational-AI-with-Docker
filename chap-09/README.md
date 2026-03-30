@@ -4,7 +4,7 @@
 ## What you need
 
 - Docker Desktop 4.58+ (for Sandboxes)
-- cagent CLI - `brew install docker/tap/docker-agent`
+- Docker Agent CLI - `brew install docker/tap/docker-agent`
 - For kagent stuff: kubectl, kind, Helm 3
 - At least one API key (OpenAI, Anthropic, or Gemini)
 
