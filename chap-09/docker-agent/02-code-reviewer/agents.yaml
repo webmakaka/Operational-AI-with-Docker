@@ -9,9 +9,10 @@ agents:
       3. Use think to analyze patterns and issues
       4. Write a review summary using filesystem
       5. Use memory to track which files you've reviewed
-    tools:
-      - filesystem
-      - shell
-      - memory
-      - think
-      - todo
+    toolsets:
+      - type: filesystem
+      - type: shell
+      - type: memory
+        path: ./review-memory.db
+      - type: think
+      - type: todo
