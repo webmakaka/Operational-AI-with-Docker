@@ -1,44 +1,59 @@
-apiVersion: kagent.ai/v1
+apiVersion: kagent.dev/v1alpha2
 kind: Agent
 metadata:
   name: ops-coordinator
+  namespace: kagent
 spec:
   description: "Coordinates DevOps troubleshooting"
-  systemPrompt: |
-    You coordinate troubleshooting across specialized agents.
-    Delegate log analysis to log-analyzer.
-    Delegate metrics investigation to metrics-checker.
-    Synthesize findings into actionable recommendations.
-  modelConfigRef:
-    name: claude-sonnet-config
-  subAgents:
-    - name: log-analyzer
-    - name: metrics-checker
+  type: Declarative
+  declarative:
+    modelConfig: default-model-config
+    systemMessage: |
+      You coordinate troubleshooting across specialized agents.
+      Delegate log analysis to log-analyzer.
+      Delegate metrics investigation to metrics-checker.
+      Synthesize findings into actionable recommendations.
 ---
-apiVersion: kagent.ai/v1
+apiVersion: kagent.dev/v1alpha2
 kind: Agent
 metadata:
   name: log-analyzer
+  namespace: kagent
 spec:
   description: "Analyzes Kubernetes logs for issues"
-  systemPrompt: |
-    Analyze Kubernetes pod logs to identify errors,
-    warnings, and anomalies. Report findings concisely.
-  modelConfigRef:
-    name: gpt4-mini-config
-  tools:
-    - name: k8s-logs
+  type: Declarative
+  declarative:
+    modelConfig: default-model-config
+    systemMessage: |
+      Analyze Kubernetes pod logs to identify errors,
+      warnings, and anomalies. Report findings concisely.
+    tools:
+      - type: McpServer
+        mcpServer:
+          name: kagent-tool-server
+          kind: RemoteMCPServer
+          toolNames:
+            - k8s_get_pod_logs
+            - k8s_get_events
 ---
-apiVersion: kagent.ai/v1
+apiVersion: kagent.dev/v1alpha2
 kind: Agent
 metadata:
   name: metrics-checker
+  namespace: kagent
 spec:
   description: "Checks cluster metrics and resource usage"
-  systemPrompt: |
-    Monitor Kubernetes cluster metrics including CPU,
-    memory, and network usage. Identify resource bottlenecks.
-  modelConfigRef:
-    name: gpt4-mini-config
-  tools:
-    - name: prometheus-query
+  type: Declarative
+  declarative:
+    modelConfig: default-model-config
+    systemMessage: |
+      Monitor Kubernetes cluster metrics including CPU,
+      memory, and network usage. Identify resource bottlenecks.
+    tools:
+      - type: McpServer
+        mcpServer:
+          name: kagent-tool-server
+          kind: RemoteMCPServer
+          toolNames:
+            - k8s_get_resources
+            - k8s_describe_resource
