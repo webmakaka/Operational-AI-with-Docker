@@ -2,10 +2,11 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: log-analyzer-hpa
+  namespace: kagent
 spec:
   scaleTargetRef:
-    apiVersion: kagent.ai/v1
-    kind: Agent
+    apiVersion: apps/v1
+    kind: Deployment
     name: log-analyzer
   minReplicas: 1
   maxReplicas: 5
