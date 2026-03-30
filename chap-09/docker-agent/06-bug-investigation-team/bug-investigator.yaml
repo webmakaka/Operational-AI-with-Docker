@@ -1,15 +1,34 @@
-name: bug-investigator
-model: anthropic/claude-sonnet-4-20250514
-description: Lead investigator that coordinates bug fixes
-instructions: |
-  You lead bug investigations. When a bug is reported:
-  1. Analyze the bug report
-  2. Delegate code investigation to the code-analyst
-  3. Delegate fix implementation to the fixer
-  4. Review the fix and provide final assessment
-tools:
-  - think
-  - todo
-sub_agents:
-  - agents/code-analyst.yaml
-  - agents/fixer.yaml
+agents:
+  root:
+    model: anthropic/claude-sonnet-4-5
+    description: Lead investigator that coordinates bug fixes
+    instruction: |
+      You lead bug investigations. When a bug is reported:
+      1. Analyze the bug report
+      2. Delegate code investigation to the code-analyst
+      3. Delegate fix implementation to the fixer
+      4. Review the fix and provide final assessment
+    toolsets:
+      - type: think
+      - type: todo
+    sub_agents: [code-analyst, fixer]
+
+  code-analyst:
+    model: anthropic/claude-sonnet-4-5
+    description: Investigates code to find root causes
+    instruction: |
+      Analyze the codebase to find the root cause of bugs.
+      Read relevant files, trace execution paths, and report findings.
+    toolsets:
+      - type: filesystem
+      - type: think
+
+  fixer:
+    model: anthropic/claude-sonnet-4-5
+    description: Implements bug fixes
+    instruction: |
+      Implement fixes for bugs identified by the code-analyst.
+      Make minimal, targeted changes and explain what you changed.
+    toolsets:
+      - type: filesystem
+      - type: shell
