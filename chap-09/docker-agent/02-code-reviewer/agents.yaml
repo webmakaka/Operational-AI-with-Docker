@@ -1,16 +1,17 @@
-name: code-reviewer
-model: anthropic/claude-sonnet-4-20250514
-description: Reviews code and suggests improvements
-instructions: |
-  You are an expert code reviewer. When given a codebase:
-  1. Use filesystem to read the project structure
-  2. Create a todo list of files to review
-  3. Use think to analyze patterns and issues
-  4. Write a review summary using filesystem
-  5. Use memory to track which files you've reviewed
-tools:
-  - filesystem
-  - shell
-  - memory
-  - think
-  - todo
+agents:
+  code-reviewer:
+    model: anthropic/claude-sonnet-4-5
+    description: Reviews code and suggests improvements
+    instruction: |
+      You are an expert code reviewer. When given a codebase:
+      1. Use filesystem to read the project structure
+      2. Create a todo list of files to review
+      3. Use think to analyze patterns and issues
+      4. Write a review summary using filesystem
+      5. Use memory to track which files you've reviewed
+    tools:
+      - filesystem
+      - shell
+      - memory
+      - think
+      - todo
