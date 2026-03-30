@@ -6,10 +6,31 @@ models:
 
   precise-coder:
     provider: anthropic
-    model: claude-sonnet-4-20250514
+    model: claude-sonnet-4-5
     temperature: 0.1
 
   deep-thinker:
     provider: anthropic
-    model: claude-sonnet-4-20250514
-    thinking_budget: high
+    model: claude-sonnet-4-5
+    thinking_budget: 8192
+
+agents:
+  root:
+    model: creative-writer
+    description: Creative writing assistant
+    instruction: You are a creative writer. Be imaginative and expressive.
+
+  coder:
+    model: precise-coder
+    description: Precise coding assistant
+    instruction: You are an expert coder. Be exact, minimal, and correct.
+    toolsets:
+      - type: filesystem
+      - type: shell
+
+  analyst:
+    model: deep-thinker
+    description: Deep technical analyst
+    instruction: Perform thorough analysis. Think through edge cases and implications.
+    toolsets:
+      - type: think
