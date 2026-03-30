@@ -4,7 +4,7 @@
 ## What you need
 
 - Docker Desktop 4.58+ (for Sandboxes)
-- cagent CLI - `brew install docker/tap/cagent`
+- cagent CLI - `brew install docker/tap/docker-agent`
 - For kagent stuff: kubectl, kind, Helm 3
 - At least one API key (OpenAI, Anthropic, or Gemini)
 
@@ -12,7 +12,7 @@
 
 ```
 sandboxes/     Docker Sandboxes commands (run interactively)
-cagent/        cagent YAML configs (run with: cagent run <file>)
+docker-agent/  Docker Agent YAML configs (run with: cagent run <file>)
 kagent/        Kubernetes manifests for kagent
 ```
 
@@ -23,8 +23,8 @@ kagent/        Kubernetes manifests for kagent
 docker sandbox run claude ~/my-project
 
 # Run a cagent example
-cd cagent/01-pirate-assistant
-cagent run agents.yaml
+cd docker-agent/01-pirate-assistant
+docker agent run agents.yaml
 
 # Deploy kagent on a local cluster
 cd kagent
