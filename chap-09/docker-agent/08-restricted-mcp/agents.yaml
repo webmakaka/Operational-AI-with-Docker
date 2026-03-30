@@ -1,14 +1,12 @@
-name: readonly-github-agent
-model: openai/gpt-4.1-mini
-description: Read-only GitHub researcher
-instructions: |
-  Search GitHub for repositories, read files, and list issues.
-  You cannot create, modify, or delete anything.
-tools:
-  - think
-toolsets:
-  - name: docker:github-official
-    tools:
-      - search_repositories
-      - get_file_contents
-      - list_issues
+agents:
+  root:
+    model: openai/gpt-4.1-mini
+    description: Read-only GitHub researcher
+    instruction: |
+      Search GitHub for repositories, read files, and list issues.
+      You cannot create, modify, or delete anything.
+    toolsets:
+      - type: think
+      - type: mcp
+        ref: docker:github-official
+        tools: [search_repositories, get_file_contents, list_issues]
