@@ -1,12 +1,29 @@
-apiVersion: kagent.ai/v1
+apiVersion: kagent.dev/v1alpha2
 kind: Agent
 metadata:
   name: log-analyzer
+  namespace: kagent
 spec:
-  resources:
-    requests:
-      cpu: "500m"
-      memory: "512Mi"
-    limits:
-      cpu: "2"
-      memory: "2Gi"
+  description: "Analyzes Kubernetes logs for issues"
+  type: Declarative
+  declarative:
+    modelConfig: default-model-config
+    systemMessage: |
+      Analyze Kubernetes pod logs to identify errors,
+      warnings, and anomalies. Report findings concisely.
+    deployment:
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "512Mi"
+        limits:
+          cpu: "2"
+          memory: "2Gi"
+    tools:
+      - type: McpServer
+        mcpServer:
+          name: kagent-tool-server
+          kind: RemoteMCPServer
+          toolNames:
+            - k8s_get_pod_logs
+            - k8s_get_events
