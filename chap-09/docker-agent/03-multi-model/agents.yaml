@@ -1,17 +1,18 @@
 agents:
-  quick-classifier:
+  root:
     model: openai/gpt-4.1-mini
     description: Fast triage of incoming requests
-    instructions: |
+    instruction: |
       Classify incoming requests as: bug, feature, question, or other.
-      Be fast and concise.
+      Be fast and concise. For complex issues, delegate to deep-analyzer.
+    sub_agents: [deep-analyzer]
 
   deep-analyzer:
-    model: anthropic/claude-sonnet-4-20250514
+    model: anthropic/claude-sonnet-4-5
     description: Deep analysis of complex issues
-    instructions: |
+    instruction: |
       Perform thorough analysis of technical issues.
       Consider edge cases, security implications, and performance.
-    tools:
-      - think
-      - filesystem
+    toolsets:
+      - type: think
+      - type: filesystem
