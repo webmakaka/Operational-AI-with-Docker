@@ -1,16 +1,22 @@
 services:
   gateway:
     image: docker/mcp-gateway
-    pull_policy: always
-    command:
-      - --servers=github-official
-      - --secrets=docker-desktop:/run/secrets/mcp_secret
+    ports:
+      - "8080:8080"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "${HOME}/.docker/mcp:/mcp"
+      - "${HOME}/projects:${HOME}/projects"
+      - "${HOME}/documents:${HOME}/documents"
+    command:
+      - --servers=github-official,filesystem,firecrawl
+      - --secrets=docker-desktop:/run/secrets/mcp_secret
+      - --transport=sse
+      - --port=8080
+      - --verify-signatures
+      - --block-secrets
+      - --log-calls
+      - --additional-config=/mcp/config.yaml
     secrets:
       - mcp_secret
-
-secrets:
-  mcp_secret:
-    file: .env
 
