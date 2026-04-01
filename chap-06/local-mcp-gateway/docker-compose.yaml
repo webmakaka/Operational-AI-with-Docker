@@ -5,13 +5,15 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "~/.docker/mcp:/mcp"
+      - "${HOME}/.docker/mcp:/mcp"
+      - "${HOME}/projects:${HOME}/projects"
+      - "${HOME}/documents:${HOME}/documents"
     command:
-      - --catalog=/mcp/catalogs/docker-mcp.yaml
-      - --config=/mcp/config.yaml
-      - --registry=/mcp/registry.yaml
-      - --tools-config=/mcp/tools.yaml
+      - --servers=github-official,filesystem,firecrawl
       - --secrets=docker-desktop
-      - --watch=true
       - --transport=sse
       - --port=8080
+      - --verify-signatures
+      - --block-secrets
+      - --log-calls
+      - --additional-config=/mcp/config.yaml
