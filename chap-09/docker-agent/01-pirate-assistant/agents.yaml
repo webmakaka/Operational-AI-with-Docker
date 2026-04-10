@@ -1,5 +1,5 @@
 agents:
-  pirate-assistant:
+  root:
     model: openai/gpt-4.1-mini
     description: A helpful assistant that talks like a pirate
     instruction: |
