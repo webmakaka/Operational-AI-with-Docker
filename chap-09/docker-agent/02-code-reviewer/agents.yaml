@@ -1,5 +1,5 @@
 agents:
-  code-reviewer:
+  root:
     model: anthropic/claude-sonnet-4-5
     description: Reviews code and suggests improvements
     instruction: |
