@@ -37,7 +37,7 @@ Each chapter has its own folder with runnable code and a chapter-specific `READM
 | 6  | [Protocol-Based AI Integration with MCP](./chap-06) | Give your models hands. Use Docker MCP Gateway and the MCP Catalog (270+ servers) to connect AI to databases, APIs and tools — with proper isolation, secret management and OAuth. |
 | 7  | [Building Autonomous AI Agents](./chap-07) | Move from "AI that answers" to "AI that does". Container-isolated agents, agent-to-agent communication, discovery, memory/state, reasoning, tool access and sandboxing — each in its own subfolder. |
 | 8  | [Multi-Model and Multi-Agent Architectures](./chap-08) | When one agent isn't enough. Route tasks by complexity, coordinate specialized models and build a working multi-agent research assistant. |
-| 9  | [Advanced Agent Orchestration](./chap-09) | Production-grade fleets on Kubernetes with `kagent`. Auto-registration, peer discovery, distributed tracing and sandboxed execution patterns for real workloads. |
+| 9  | [Advanced Agent Orchestration](./chap-09) | Securing agent execution using Docker Sandboxes. Declarative agent teams with Docker Agent. Production-grade fleets on Kubernetes with `kagent`. Auto-registration, peer discovery, distributed tracing and sandboxed execution patterns for real workloads. |
 
 ## Prerequisites
 
