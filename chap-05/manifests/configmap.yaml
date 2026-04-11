@@ -1,0 +1,18 @@
+apiVersion: v1 
+kind: ConfigMap 
+metadata: 
+  name: dmr-config 
+  namespace: ai-app 
+data: 
+  MODEL_NAME: "llama3.2:3B-Q4_K_M" 
+  DMR_HOST: "0.0.0.0" 
+  DMR_PORT: "12434"
+--- 
+apiVersion: v1 
+kind: Secret 
+metadata: 
+  name: app-secrets 
+  namespace: ai-app 
+type: Opaque 
+stringData: 
+  ANTHROPIC_API_KEY: "your-api-key-here"

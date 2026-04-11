@@ -35,7 +35,7 @@ spec:
             - containerPort: 8080
           env:
             - name: LLM_URL
-              value: "http://host.docker.internal:12434/engines/v1"
+              value: "http://docker-model-runner:12434/engines/v1"
             - name: LLM_MODEL
               valueFrom:
                 configMapKeyRef:
