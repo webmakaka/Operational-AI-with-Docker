@@ -1,4 +1,4 @@
-optimum[exporters]
+optimum[onnxruntime]
 onnxruntime 
 transformers 
 torch 
