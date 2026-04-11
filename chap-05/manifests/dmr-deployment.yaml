@@ -26,9 +26,19 @@ spec:
       labels:
         app: docker-model-runner
     spec:
+      initContainers:
+      - name: changeowner
+        image: busybox
+        command: ["sh", "-c", "chmod a+rwx /models"]
+        volumeMounts:
+        - name: model-files
+          mountPath: /models
       containers:
         - name: model-runner
           image: docker/model-runner:latest
+          env:
+          - name: DMR_ORIGINS
+            value: "http://localhost:31245,http://localhost:12434"
           ports:
             - containerPort: 12434
           envFrom:
@@ -53,11 +63,31 @@ spec:
             failureThreshold: 6
           livenessProbe:
             httpGet:
-              path: /health
+              path: /v1/models
               port: 12434
             initialDelaySeconds: 120
             periodSeconds: 30
             failureThreshold: 3
+        - name: model-init
+          image: curlimages/curl:8.14.1
+          envFrom:
+            - configMapRef:
+                name: dmr-config
+          command: ["/bin/sh", "-c"]
+          args:
+          - |
+            set -ex
+            MODEL_RUNNER=http://localhost:12434
+            echo "Pre-pulling models..."
+            if [ -n "$MODEL_NAME" ]; then
+              echo "Pulling model: $MODEL_NAME"
+              curl -d "{\"from\": \"$MODEL_NAME\"}" "$MODEL_RUNNER"/models/create
+            fi
+            echo "Model pre-pull complete"
+            tail -f /dev/null
+          volumeMounts:
+          - name: model-files
+            mountPath: /models
       volumes:
         - name: model-files
           persistentVolumeClaim:
