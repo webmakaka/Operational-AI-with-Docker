@@ -1,6 +1,6 @@
 # Operational AI with Docker
 
-This is the code repository for **Operational AI with Docker: LLMOps, Agents and Multi-Model Systems with Docker and Kubernetes**, published by Packt.
+This is the code repository for **[Operational AI with Docker](https://www.amazon.com/dp/B0GTPYRT9Z): LLMOps, Agents and Multi-Model Systems with Docker and Kubernetes**, published by Packt.
 
 > Build, deploy and scale production-ready AI applications using Docker's integrated AI toolkit.
 
