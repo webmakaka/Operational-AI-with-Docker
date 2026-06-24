@@ -9,27 +9,6 @@ https://github.com/PacktPublishing/Operational-AI-with-Docker
 
 This book is for DevOps engineers, platform engineers, AI/ML engineers, solutions architects and developers who want to operationalize AI applications. Whether you're deploying your first LLM or building complex multi-agent systems, this book provides practical guidance for production AI with Docker.
 
-A basic understanding of Docker containers and AI concepts is helpful but not required. The book assumes familiarity with command-line tools and includes hands-on examples that work on macOS, Windows and Linux.
-
-## What this book is about
-
-If you've ever wanted to take an AI app from "works on my laptop" to something you can actually run in production, this book is for you. It walks through the full lifecycle running local LLMs, wiring them into real applications, integrating external tools through MCP, building autonomous agents and finally orchestrating fleets of agents on Kubernetes all using Docker's AI tooling.
-
-You'll work hands-on with Docker Desktop, Docker Model Runner, MCP Gateway, Docker Hardened Images, kagent and you'll see how the same containers you already know can carry AI workloads safely and at scale.
-
-## What you'll learn
-
-- Run and optimize local LLMs with Docker Model Runner
-- Integrate AI applications with external systems using MCP (Model Context Protocol)
-- Deploy MCP servers securely with Docker MCP Gateway
-- Build autonomous AI agents with multi-agent architectures
-- Implement production security with Docker Hardened Images
-- Monitor AI workloads with Prometheus and Grafana
-- Integrate AI with GitHub, Slack, Kubernetes and databases
-- Scale AI applications from development to production
-- Implement enterprise security patterns for AI deployments
-- Automate AI workflows with Docker Compose and orchestration
-
 ## Chapter guide
 
 Each chapter has its own folder with runnable code and a chapter-specific `README.md`. Click any chapter title to jump straight to its code.
@@ -58,3 +37,22 @@ You don't need to be an AI expert, but you should be comfortable on the command 
 - A basic grasp of Docker and what an LLM is. That's it.
 
 The examples are tested on macOS, Windows and Linux.
+
+## What this book is about
+
+If you've ever wanted to take an AI app from "works on my laptop" to something you can actually run in production, this book is for you. It walks through the full lifecycle running local LLMs, wiring them into real applications, integrating external tools through MCP, building autonomous agents and finally orchestrating fleets of agents on Kubernetes all using Docker's AI tooling.
+
+You'll work hands-on with Docker Desktop, Docker Model Runner, MCP Gateway, Docker Hardened Images, kagent and you'll see how the same containers you already know can carry AI workloads safely and at scale.
+
+## What you'll learn
+
+- Run and optimize local LLMs with Docker Model Runner
+- Integrate AI applications with external systems using MCP (Model Context Protocol)
+- Deploy MCP servers securely with Docker MCP Gateway
+- Build autonomous AI agents with multi-agent architectures
+- Implement production security with Docker Hardened Images
+- Monitor AI workloads with Prometheus and Grafana
+- Integrate AI with GitHub, Slack, Kubernetes and databases
+- Scale AI applications from development to production
+- Implement enterprise security patterns for AI deployments
+- Automate AI workflows with Docker Compose and orchestration
