@@ -1,6 +1,6 @@
 # [Book] [Ajeet Singh Raina, Harsh Manvar] Operational AI with Docker: LLMOps, Agents and Multi-Model Systems with Docker and Kubernetes [ENG, 2026]
 
-<img src="./img/Operational-AI-with-Docker-Cover.webp" alt="Operational AI with Docker" height="256px" align="right">
+<img src="./img/Operational-AI-with-Docker-Cover.webp" alt="Operational AI with Docker" height="512px" align="right">
 
 > Build, deploy and scale production-ready AI applications using Docker's integrated AI toolkit.
 
@@ -10,8 +10,6 @@ https://github.com/PacktPublishing/Operational-AI-with-Docker
 This book is for DevOps engineers, platform engineers, AI/ML engineers, solutions architects and developers who want to operationalize AI applications. Whether you're deploying your first LLM or building complex multi-agent systems, this book provides practical guidance for production AI with Docker.
 
 ## Chapter guide
-
-Each chapter has its own folder with runnable code and a chapter-specific `README.md`. Click any chapter title to jump straight to its code.
 
 | #   | Chapter                                   | What's inside                                                                                                                                                                                                                                                        |
 | --- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
