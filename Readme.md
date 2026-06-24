@@ -9,6 +9,12 @@ https://github.com/PacktPublishing/Operational-AI-with-Docker
 
 This book is for DevOps engineers, platform engineers, AI/ML engineers, solutions architects and developers who want to operationalize AI applications. Whether you're deploying your first LLM or building complex multi-agent systems, this book provides practical guidance for production AI with Docker.
 
+## What this book is about
+
+If you've ever wanted to take an AI app from "works on my laptop" to something you can actually run in production, this book is for you. It walks through the full lifecycle running local LLMs, wiring them into real applications, integrating external tools through MCP, building autonomous agents and finally orchestrating fleets of agents on Kubernetes all using Docker's AI tooling.
+
+You'll work hands-on with Docker Desktop, Docker Model Runner, MCP Gateway, Docker Hardened Images, kagent and you'll see how the same containers you already know can carry AI workloads safely and at scale.
+
 ## Chapter guide
 
 | #   | Chapter                                   | What's inside                                                                                                                                                                                                                                                        |
@@ -35,12 +41,6 @@ You don't need to be an AI expert, but you should be comfortable on the command 
 - A basic grasp of Docker and what an LLM is. That's it.
 
 The examples are tested on macOS, Windows and Linux.
-
-## What this book is about
-
-If you've ever wanted to take an AI app from "works on my laptop" to something you can actually run in production, this book is for you. It walks through the full lifecycle running local LLMs, wiring them into real applications, integrating external tools through MCP, building autonomous agents and finally orchestrating fleets of agents on Kubernetes all using Docker's AI tooling.
-
-You'll work hands-on with Docker Desktop, Docker Model Runner, MCP Gateway, Docker Hardened Images, kagent and you'll see how the same containers you already know can carry AI workloads safely and at scale.
 
 ## What you'll learn
 
