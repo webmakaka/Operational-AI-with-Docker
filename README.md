@@ -1,4 +1,9 @@
-# Operational AI with Docker
+# [Book] [Ajeet Singh Raina, Harsh Manvar] Operational AI with Docker [ENG, 2026]
+
+## I haven't found the free PDF yet.
+
+**Original src:**  
+https://github.com/PacktPublishing/Operational-AI-with-Docker
 
 This is the code repository for **[Operational AI with Docker](https://www.amazon.com/dp/B0GTPYRT9Z): LLMOps, Agents and Multi-Model Systems with Docker and Kubernetes**, published by Packt.
 
