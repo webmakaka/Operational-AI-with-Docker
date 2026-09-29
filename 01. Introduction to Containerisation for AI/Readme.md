@@ -25,14 +25,14 @@ The application consists of:
 Navigate to the `tiny-service-container` directory and build the Docker image:
 
 ```bash
-cd tiny-service-container
-docker build -t tiny-service:latest .
+$ cd tiny-service-container
+$ docker build -t tiny-service:latest .
 ```
 
 Or from the `chap-01` directory:
 
 ```bash
-docker build -t tiny-service:latest -f tiny-service-container/Dockerfile tiny-service-container/
+$ docker build -t tiny-service:latest -f tiny-service-container/Dockerfile tiny-service-container/
 ```
 
 #### Run Command
@@ -40,13 +40,13 @@ docker build -t tiny-service:latest -f tiny-service-container/Dockerfile tiny-se
 Start the container and expose port 8000:
 
 ```bash
-docker run -d -p 8000:8000 --name tiny-service tiny-service:latest
+$ docker run -d -p 8000:8000 --name tiny-service tiny-service:latest
 ```
 
 To run in the foreground (see logs directly):
 
 ```bash
-docker run -p 8000:8000 --name tiny-service tiny-service:latest
+$ docker run -p 8000:8000 --name tiny-service tiny-service:latest
 ```
 
 #### Test the Service
@@ -54,10 +54,11 @@ docker run -p 8000:8000 --name tiny-service tiny-service:latest
 Once running, test the health endpoint:
 
 ```bash
-curl http://localhost:8000/health
+$ curl http://localhost:8000/health
 ```
 
 Expected response:
+
 ```json
 {"ok":true}
 ```
@@ -65,8 +66,8 @@ Expected response:
 #### Stop and Remove Container
 
 ```bash
-docker stop tiny-service
-docker rm tiny-service
+$ docker stop tiny-service
+$ docker rm tiny-service
 ```
 
 ---
@@ -94,14 +95,14 @@ The application consists of:
 Navigate to the `tiny-training-run` directory and build the Docker image:
 
 ```bash
-cd tiny-training-run
-docker build -t tiny-training:latest .
+$ cd tiny-training-run
+$ docker build -t tiny-training:latest .
 ```
 
 Or from the `chap-01` directory:
 
 ```bash
-docker build -t tiny-training:latest -f tiny-training-run/Dockerfile tiny-training-run/
+$ docker build -t tiny-training:latest -f tiny-training-run/Dockerfile tiny-training-run/
 ```
 
 #### Run Command
@@ -109,13 +110,13 @@ docker build -t tiny-training:latest -f tiny-training-run/Dockerfile tiny-traini
 Run the training container (it will execute the training script and exit):
 
 ```bash
-docker run --name tiny-training tiny-training:latest
+$ docker run --name tiny-training tiny-training:latest
 ```
 
 To view the output and ensure it runs in the foreground:
 
 ```bash
-docker run --rm tiny-training:latest
+$ docker run --rm tiny-training:latest
 ```
 
 The `--rm` flag automatically removes the container after it exits.
@@ -135,7 +136,7 @@ This indicates the model achieved approximately 97.4% accuracy on the test set.
 If you ran the container in detached mode (`-d` flag), you can view the logs:
 
 ```bash
-docker logs tiny-training
+$ docker logs tiny-training
 ```
 
 #### Remove Container
@@ -143,7 +144,7 @@ docker logs tiny-training
 If the container was not automatically removed:
 
 ```bash
-docker rm tiny-training
+$ docker rm tiny-training
 ```
 
 ---
@@ -154,31 +155,31 @@ docker rm tiny-training
 
 ```bash
 # Build
-cd tiny-service-container
-docker build -t tiny-service:latest .
+$ cd tiny-service-container
+$ docker build -t tiny-service:latest .
 
 # Run
-docker run -d -p 8000:8000 --name tiny-service tiny-service:latest
+$ docker run -d -p 8000:8000 --name tiny-service tiny-service:latest
 
 # Test
-curl http://localhost:8000/health
+$ curl http://localhost:8000/health
 
 # Stop and remove
-docker stop tiny-service && docker rm tiny-service
+$ docker stop tiny-service && docker rm tiny-service
 ```
 
 ### tiny-training-run
 
 ```bash
-# Build
-cd tiny-training-run
-docker build -t tiny-training:latest .
+// Build
+$ cd tiny-training-run
+$ docker build -t tiny-training:latest .
 
-# Run
-docker run --rm tiny-training:latest
+// Run
+$ docker run --rm tiny-training:latest
 
-# View logs (if not using --rm)
-docker logs tiny-training
+// View logs (if not using --rm)
+$ docker logs tiny-training
 ```
 
 ---
