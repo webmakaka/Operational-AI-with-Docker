@@ -1,7 +1,5 @@
 # Chapter 3: Model Serving with Docker Model Runner
 
-Code examples for Chapter 3 
-
 ## Structure
 
 ```
@@ -24,8 +22,8 @@ chap-03/
 ## Quick start
 
 ```bash
-# Pull the model used in most examples
-docker model pull ai/smollm2:360M-Q4_K_M
+// Pull the model used in most examples
+$ docker model pull ai/smollm2:360M-Q4_K_M
 ```
 
 See the chapter for full walkthrough.
