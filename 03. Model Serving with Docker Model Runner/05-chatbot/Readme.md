@@ -16,7 +16,7 @@ $ docker compose up --build
 Open http://localhost:3000 in your browser.
 
 
-<img src="../../img/pic03-01.png" alt="Chatbot: React + Go + Docker Model Runner" height="512px" align="right">
+<img src="../../img/pic03-01.png" alt="Chatbot: React + Go + Docker Model Runner">
 
 
 <br/>
