@@ -40,24 +40,7 @@ chap-05/
         └── log_example.py  # Python snippet showing mlflow.log_*
 ```
 
-## Prerequisites
-
-- Docker Desktop 4.38 or later
-- Kubernetes enabled via Settings → Kubernetes → kind (2 worker nodes)
-- `kubectl` available (`kubectl version --client`)
-- Docker Model Runner enabled in Docker Desktop with TCP port 12434
-- A model pulled on the host: `docker model pull ai/smollm2:360M-Q4_K_M`
-
-## Important: Docker Desktop kind cluster notes
-
-When using Docker Desktop's built-in kind cluster, locally built images must
-be loaded into the worker node's container runtime. The setup script handles
-this automatically, but if you rebuild images you'll need to reload them:
-
-```bash
-docker save go-backend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
-docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
-```
+<br/>
 
 ## Quick start
 
