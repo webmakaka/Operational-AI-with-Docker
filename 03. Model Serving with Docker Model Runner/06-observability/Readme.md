@@ -24,8 +24,8 @@ Extends the Chapter 3 chatbot with a full observability stack.
 ## Running
 
 ```bash
-cd chap-03/06-observability
-docker compose up --build
+$ cd chap-03/06-observability
+$ docker compose up --build
 
 # Watch metrics
 open http://localhost:9090      # Prometheus — query genai_app_*
