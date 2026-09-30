@@ -16,30 +16,6 @@ nodes:
 EOF
 ```
 
-## Structure
-
-```
-chap-05/
-├── manifests/              # Core chatbot stack (apply all at once)
-│   ├── storage.yaml        # PersistentVolumeClaim for model files
-│   ├── config.yaml         # ConfigMap + Secret
-│   ├── dmr-deployment.yaml # Docker Model Runner Deployment + Service
-│   ├── backend-deployment.yaml   # Go backend Deployment + Service
-│   └── frontend-deployment.yaml  # React frontend Deployment + Service
-├── scaling/
-│   └── hpa.yaml            # Horizontal Pod Autoscaler for go-backend
-└── ml-ecosystem/
-    ├── kuberay/
-    │   └── hello-ray.yaml  # Minimal RayJob to verify KubeRay
-    ├── kubeflow/
-    │   └── pipeline.py     # Minimal two-step Kubeflow Pipeline
-    ├── kserve/
-    │   └── sklearn-iris.yaml  # InferenceService example
-    └── mlflow/
-        ├── mlflow.yaml     # MLflow Tracking server Deployment + Service
-        └── log_example.py  # Python snippet showing mlflow.log_*
-```
-
 <br/>
 
 ## Quick start
@@ -101,9 +77,35 @@ $ kubectl delete namespace ai-app
 ```
 // Delete Kind cluster
 $ kind delete cluster --name platform-dev
-
 ```
 
+<br/>
+
+## Structure
+
+```
+chap-05/
+├── manifests/              # Core chatbot stack (apply all at once)
+│   ├── storage.yaml        # PersistentVolumeClaim for model files
+│   ├── config.yaml         # ConfigMap + Secret
+│   ├── dmr-deployment.yaml # Docker Model Runner Deployment + Service
+│   ├── backend-deployment.yaml   # Go backend Deployment + Service
+│   └── frontend-deployment.yaml  # React frontend Deployment + Service
+├── scaling/
+│   └── hpa.yaml            # Horizontal Pod Autoscaler for go-backend
+└── ml-ecosystem/
+    ├── kuberay/
+    │   └── hello-ray.yaml  # Minimal RayJob to verify KubeRay
+    ├── kubeflow/
+    │   └── pipeline.py     # Minimal two-step Kubeflow Pipeline
+    ├── kserve/
+    │   └── sklearn-iris.yaml  # InferenceService example
+    └── mlflow/
+        ├── mlflow.yaml     # MLflow Tracking server Deployment + Service
+        └── log_example.py  # Python snippet showing mlflow.log_*
+```
+
+<br/>
 
 ## Architecture note: DMR on Kubernetes
 
