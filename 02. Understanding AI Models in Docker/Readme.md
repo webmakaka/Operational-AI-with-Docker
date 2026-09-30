@@ -76,7 +76,7 @@ $ ubuntu-drivers devices
 
 ```shell
 // $ sudo apt update
-// $ sudo apt install nvidia-driver-610-open
+// $ sudo apt install nvidia-driver-610-open -y
 // $ sudo reboot
 ```
 
