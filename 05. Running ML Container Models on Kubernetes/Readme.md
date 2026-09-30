@@ -53,10 +53,7 @@ $ cd Operational-AI-with-Docker/03. Model Serving with Docker Model Runner
 $ docker build -t go-backend:latest 05-chatbot/backend/
 $ docker build -t react-frontend:latest 05-chatbot/frontend/
 
-// 3. Load images into the kind worker node
-// $ docker save go-backend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
-// $ docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
-
+// 3. Load images into the kind
 $ kind --name platform-dev load docker-image go-backend:latest
 $ kind --name platform-dev load docker-image react-frontend:latest
 
