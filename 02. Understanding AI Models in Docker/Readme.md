@@ -5,6 +5,20 @@ https://github.com/docker/model-runner
 <br/>
 
 ```shell
+$ docker model version
+Client:
+ Version:    v1.2.6
+ OS/Arch:    linux/amd64
+
+Server:
+ Version:    (not reachable)
+ Engine:     Docker Engine
+```
+
+
+<br/>
+
+```shell
 $ docker model pull smollm2:360M-Q4_K_M
 ```
 
