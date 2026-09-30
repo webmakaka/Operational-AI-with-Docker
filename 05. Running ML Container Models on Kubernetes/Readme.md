@@ -73,6 +73,12 @@ $ kubectl logs deployment/docker-model-runner -n ai-app -c model-init --tail=50
 <br/>
 
 ```shell
+$ kubectl describe pod -l app=docker-model-runner -n ai-app | grep -A 5 "Last State:"
+```
+
+<br/>
+
+```shell
 // 8. Clean up when done
 $ kubectl delete namespace ai-app
 ```
