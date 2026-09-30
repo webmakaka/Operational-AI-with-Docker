@@ -41,7 +41,46 @@ $ docker model tag smollm2:360M-Q4_K_M registry.example.com/myteam/smollm2:360M-
 $ docker model push registry.example.com/myteam/smollm2:360M-Q4_K_M
 ```
 
+
 <br/>
+
+```shell
+$ $ nvidia-smi</pre>
+```
+
+<br/>
+
+```
+// required
+cuda>=13.3
+```
+
+<br/>
+
+```
+Driver Version: 595.91.07
+CUDA Version: 13.2
+```
+
+<br/>
+
+
+```shell
+$ sudo apt update
+$ apt policy nvidia-driver-*
+$ ubuntu-drivers devices
+```
+
+<br/>
+
+
+```shell
+$ sudo ubuntu-drivers install
+$ sudo reboot
+```
+
+<br/>
+
 
 
 ```shell
