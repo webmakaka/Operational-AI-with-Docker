@@ -40,8 +40,4 @@ POST http://model-runner.docker.internal/engines/v1/chat/completions
 for containers to reach the Model Runner on the host — equivalent to
 `localhost:12434` from outside a container.
 
-## Chapter 5 connection
 
-This same application is migrated to Kubernetes in Chapter 5. The same
-Docker images, the same API endpoint — just deployed as Deployments and
-Services on a kind cluster instead of via Compose.
