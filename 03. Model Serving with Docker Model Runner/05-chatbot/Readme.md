@@ -15,6 +15,12 @@ $ docker compose up --build
 
 Open http://localhost:3000 in your browser.
 
+
+<img src="../../img/pic03-01.png" alt="Chatbot: React + Go + Docker Model Runner" height="512px" align="right">
+
+
+<br/>
+
 ## How it works
 
 Compose injects two environment variables into the Go backend container:
