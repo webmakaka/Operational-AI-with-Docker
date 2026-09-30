@@ -9,8 +9,8 @@ The primary application built in Chapter 3. A full-stack chatbot where:
 ## Running
 
 ```bash
-# From chap-03/05-chatbot/
-docker compose up --build
+// From chap-03/05-chatbot/
+$ docker compose up --build
 ```
 
 Open http://localhost:3000 in your browser.
