@@ -1,7 +1,5 @@
 # Chapter 5: Running ML Container Models on Kubernetes
 
-Code examples for Chapter 5 of *Operational AI with Docker* (Packt).
-
 ## Structure
 
 ```
@@ -48,33 +46,33 @@ docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io 
 ## Quick start
 
 ```bash
-# 1. Pull the model on the host (required)
-docker model pull ai/smollm2:360M-Q4_K_M
+// 1. Pull the model on the host (required)
+$ docker model pull ai/smollm2:360M-Q4_K_M
 
-# 2. Build the application images from the Chapter 3 chatbot
-docker build -t go-backend:latest ../chap-03/05-chatbot/backend/
-docker build -t react-frontend:latest ../chap-03/05-chatbot/frontend/
+// 2. Build the application images from the Chapter 3 chatbot
+$ docker build -t go-backend:latest ../chap-03/05-chatbot/backend/
+$ docker build -t react-frontend:latest ../chap-03/05-chatbot/frontend/
 
-# 3. Load images into the kind worker node
-docker save go-backend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
-docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
+// 3. Load images into the kind worker node
+$ docker save go-backend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
+$ docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
 
-# 4. Create the namespace
-kubectl create namespace ai-app
+// 4. Create the namespace
+$ kubectl create namespace ai-app
 
-# 5. Deploy everything
-kubectl apply -f manifests/
+// 5. Deploy everything
+$ kubectl apply -f manifests/
 
-# 6. Watch deployments become ready
-kubectl get deployments -n ai-app --watch
+// 6. Watch deployments become ready
+$ kubectl get deployments -n ai-app --watch
 
-# 7. Access the chatbot (run in separate terminals)
-kubectl port-forward svc/react-frontend 3000:3000 -n ai-app &
-kubectl port-forward svc/go-backend 8080:8080 -n ai-app &
-# Open http://localhost:3000
+// 7. Access the chatbot (run in separate terminals)
+$ kubectl port-forward svc/react-frontend 3000:3000 -n ai-app &
+$ kubectl port-forward svc/go-backend 8080:8080 -n ai-app &
+// Open http://localhost:3000
 
-# 8. Clean up when done
-kubectl delete namespace ai-app
+// 8. Clean up when done
+$ kubectl delete namespace ai-app
 ```
 
 ## Architecture note: DMR on Kubernetes
