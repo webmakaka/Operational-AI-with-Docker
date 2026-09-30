@@ -4,7 +4,8 @@ metadata:
   name: dmr-config 
   namespace: ai-app 
 data: 
-  MODEL_NAME: "llama3.2:3B-Q4_K_M" 
+  # MODEL_NAME: "llama3.2:3B-Q4_K_M" 
+  MODEL_NAME: "ai/smollm2:360M-Q4_K_M"
   DMR_HOST: "0.0.0.0" 
   DMR_PORT: "12434"
 --- 
