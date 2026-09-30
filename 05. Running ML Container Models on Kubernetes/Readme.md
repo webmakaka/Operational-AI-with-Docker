@@ -44,7 +44,7 @@ $ kubectl apply -f manifests/
 
 ```shell
 // 6. Watch deployments become ready
-$ kubectl get deployments -n ai-app 
+$ kubectl get deployments -n ai-app --watch
 NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
 docker-model-runner   1/1     1            1           2m27s
 go-backend            1/1     1            1           2m27s
@@ -72,10 +72,9 @@ $ kubectl delete namespace ai-app
 
 <br/>
 
-### Cleanup
+### Delete Kind cluster
 
 ```
-// Delete Kind cluster
 $ kind delete cluster --name platform-dev
 ```
 
