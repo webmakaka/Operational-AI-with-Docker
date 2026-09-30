@@ -5,6 +5,12 @@ https://github.com/docker/model-runner
 <br/>
 
 ```shell
+$ sudo apt-get install docker-model-plugin
+```
+
+<br/>
+
+```shell
 $ docker model version
 Client:
  Version:    v1.2.6
