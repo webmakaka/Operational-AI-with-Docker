@@ -14,27 +14,6 @@ nodes:
       - containerPort: 443
         hostPort: 8443
 EOF
-
-
-$ kind create cluster --name platform-dev --image kindest/node:v1.37.0 --config - <<EOF
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-  - role: control-plane
-    extraPortMappings:
-      - containerPort: 80
-        hostPort: 8080
-      - containerPort: 443
-        hostPort: 8443
-    # Добавление сопоставления хоста во внутренний DNS кластера
-    kubeadmConfigPatches:
-    - |
-      apiVersion: kubeadm.k8s.io/v1beta3
-      kind: ClusterConfiguration
-      dns:
-        extraArgs:
-          "host.docker.internal": "172.17.0.1"
-EOF
 ```
 
 <br/>
@@ -82,7 +61,14 @@ $ kubectl port-forward svc/go-backend 8080:8080 -n ai-app &
 
 <br/>
 
-// Open http://localhost:3000
+Open http://localhost:3000
+
+
+<br/>
+
+```shell
+$ kubectl logs deployment/docker-model-runner -n ai-app -c model-init --tail=50
+```
 
 <br/>
 
