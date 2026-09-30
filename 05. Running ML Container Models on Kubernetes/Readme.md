@@ -68,30 +68,64 @@ docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io 
 $ docker model pull ai/smollm2:360M-Q4_K_M
 
 // 2. Build the application images from the Chapter 3 chatbot
-$ docker build -t go-backend:latest ../chap-03/05-chatbot/backend/
-$ docker build -t react-frontend:latest ../chap-03/05-chatbot/frontend/
+$ cd Operational-AI-with-Docker/03. Model Serving with Docker Model Runner
+$ docker build -t go-backend:latest 05-chatbot/backend/
+$ docker build -t react-frontend:latest 05-chatbot/frontend/
 
 // 3. Load images into the kind worker node
-$ docker save go-backend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
-$ docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
+// $ docker save go-backend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
+// $ docker save react-frontend:latest | docker exec -i desktop-worker ctr -n k8s.io images import -
+
+$ kind --name platform-dev load docker-image go-backend:latest
+$ kind --name platform-dev load docker-image react-frontend:latest
 
 // 4. Create the namespace
 $ kubectl create namespace ai-app
 
 // 5. Deploy everything
 $ kubectl apply -f manifests/
+```
 
+<br/>
+
+```shell
 // 6. Watch deployments become ready
-$ kubectl get deployments -n ai-app --watch
+$ kubectl get deployments -n ai-app 
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+docker-model-runner   1/1     1            1           2m27s
+go-backend            1/1     1            1           2m27s
+react-frontend        1/1     1            1           2m27s
+```
 
+<br/>
+
+```shell
 // 7. Access the chatbot (run in separate terminals)
 $ kubectl port-forward svc/react-frontend 3000:3000 -n ai-app &
 $ kubectl port-forward svc/go-backend 8080:8080 -n ai-app &
+```
+
+<br/>
+
 // Open http://localhost:3000
 
+<br/>
+
+```shell
 // 8. Clean up when done
 $ kubectl delete namespace ai-app
 ```
+
+<br/>
+
+### Cleanup
+
+```
+// Delete Kind cluster
+$ kind delete cluster --name platform-dev
+
+```
+
 
 ## Architecture note: DMR on Kubernetes
 
