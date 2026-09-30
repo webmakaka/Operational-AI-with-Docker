@@ -1,5 +1,23 @@
 # Chapter 5: Running ML Container Models on Kubernetes
 
+<br/>
+
+```bash
+$ kind create cluster --name platform-dev --image kindest/node:v1.37.0 --config - <<EOF
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      - containerPort: 80
+        hostPort: 8080
+      - containerPort: 443
+        hostPort: 8443
+  - role: worker
+  - role: worker
+EOF
+```
+
 ## Structure
 
 ```
