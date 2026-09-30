@@ -45,7 +45,7 @@ $ docker model push registry.example.com/myteam/smollm2:360M-Q4_K_M
 <br/>
 
 ```shell
-$ $ nvidia-smi</pre>
+$ nvidia-smi
 ```
 
 <br/>
