@@ -13,8 +13,6 @@ nodes:
         hostPort: 8080
       - containerPort: 443
         hostPort: 8443
-  - role: worker
-  - role: worker
 EOF
 ```
 
