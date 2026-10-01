@@ -17,6 +17,8 @@ $ kubectl wait pods -l app=ml-pipeline-ui -n kubeflow --for=condition=Ready --ti
 
 <br/>
 
+Not enough CPU and Ram 
+
 ```shell
 $ kubectl get pods -n kubeflow
 NAME                                               READY   STATUS              RESTARTS      AGE
