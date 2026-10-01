@@ -1,3 +1,4 @@
+# Choosing the right tool
 
 | Tool | Problem it solves/Reach for it when ... |
 | :--- | :--- |
