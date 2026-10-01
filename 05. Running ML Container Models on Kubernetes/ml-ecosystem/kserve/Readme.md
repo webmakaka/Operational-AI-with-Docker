@@ -91,3 +91,11 @@ EXIT=0
 ```
 $ kubectl delete pod curl-test -n ai-app --ignore-not-found
 ```
+
+
+<br/>
+
+```
+$ kubectl delete ns ai-app
+$ kubectl delete ns kserve
+```
