@@ -8,6 +8,8 @@ $ kubectl wait --for=condition=Ready pods --all -n cert-manager --timeout=120s
 
 $ kubectl apply -f \
   https://github.com/kserve/kserve/releases/download/v0.13.0/kserve.yaml
+
+$ kubectl apply -f https://github.com/kserve/kserve/releases/download/v0.13.0/kserve-cluster-resources.yaml
 ```
 
 <br/>
