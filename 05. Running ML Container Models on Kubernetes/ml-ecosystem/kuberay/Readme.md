@@ -27,4 +27,10 @@ $ kubectl apply -f hello-ray.yaml
 
 ```shell
 $ kubectl get rayjob hello-ray -n ai-app --watch
+NAME        JOB STATUS   DEPLOYMENT STATUS   RAY CLUSTER NAME   START TIME             END TIME   AGE
+hello-ray                Initializing        hello-ray-qwvlw    2026-10-01T13:26:20Z              46s
+hello-ray                Initializing        hello-ray-qwvlw    2026-10-01T13:26:20Z              82s
+hello-ray                Initializing        hello-ray-qwvlw    2026-10-01T13:26:20Z              94s
+hello-ray                Initializing        hello-ray-qwvlw    2026-10-01T13:26:20Z              96s
+hello-ray                Initializing        hello-ray-qwvlw    2026-10-01T13:26:20Z              107s
 ```
