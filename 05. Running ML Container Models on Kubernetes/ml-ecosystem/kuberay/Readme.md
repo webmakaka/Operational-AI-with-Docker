@@ -71,4 +71,5 @@ $ kubectl logs -n ai-app hello-ray-6j5xw
 
 ```
 $ kubectl delete ns ai-app
+$ kubectl delete ns kuberay-system
 ```
