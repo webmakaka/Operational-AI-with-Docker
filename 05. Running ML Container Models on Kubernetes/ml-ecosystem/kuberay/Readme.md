@@ -66,3 +66,9 @@ $ kubectl logs -n ai-app hello-ray-6j5xw
 2026-10-01 06:41:44,766	SUCC cli.py:61 -- Job 'hello-ray-sfqcr' succeeded
 2026-10-01 06:41:44,766	SUCC cli.py:62 -- -------------------------------
 ```
+
+<br/>
+
+```
+$ kubectl delete ns ai-app
+```
