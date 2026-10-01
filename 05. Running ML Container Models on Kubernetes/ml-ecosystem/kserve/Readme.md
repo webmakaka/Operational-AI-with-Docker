@@ -59,7 +59,15 @@ $ kubectl apply -f sklearn-iris.yaml
 <br/>
 
 ```shell
+$ kubectl get pods -n ai-app
+NAME                                     READY   STATUS    RESTARTS   AGE
+sklearn-iris-predictor-bbcf57c48-xg6ps   1/1     Running   0          88s
+```
+
+<br/>
+
+```shell
 $ kubectl get inferenceservice sklearn-iris -n ai-app
-NAME           URL   READY   PREV   LATEST   PREVROLLEDOUTREVISION   LATESTREADYREVISION   AGE
-sklearn-iris                                                                               110s
+NAME           URL                                      READY   PREV   LATEST   PREVROLLEDOUTREVISION   LATESTREADYREVISION   AGE
+sklearn-iris   http://sklearn-iris-ai-app.example.com   True                                                                  107s                                                                     110s
 ```
