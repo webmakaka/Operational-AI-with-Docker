@@ -30,13 +30,13 @@ The example consists of three services:
 Start the stack:
 
 ```bash
-docker compose up -d
+$ docker compose up -d
 ```
 
 Wait for the gateway to initialise the SQLite server (approximately 10 seconds), then view the client output:
 
 ```bash
-sleep 10 && docker compose logs client
+$ sleep 10 && docker compose logs client
 ```
 
 You should see:
@@ -51,7 +51,7 @@ client-1  | [{'id': 1, 'name': 'Widget', 'price': 9.99}, {'id': 2, 'name': 'Gadg
 Stop the stack:
 
 ```bash
-docker compose down
+$ docker compose down
 ```
 
 ## How it works
