@@ -16,8 +16,8 @@ spec:
               image: rayproject/ray:2.9.0
               resources:
                 requests:
-                  cpu: "1"
-                  memory: "2Gi"
+                  cpu: "100m"
+                  memory: "1Gi"
     workerGroupSpecs:
       - replicas: 2
         groupName: worker-group
@@ -29,5 +29,5 @@ spec:
                 image: rayproject/ray:2.9.0
                 resources:
                   requests:
-                    cpu: "1"
-                    memory: "2Gi"
+                    cpu: "100m"
+                    memory: "1Gi"
