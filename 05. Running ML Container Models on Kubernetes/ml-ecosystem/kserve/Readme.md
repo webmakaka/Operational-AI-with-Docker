@@ -13,17 +13,51 @@ $ kubectl apply -f \
 <br/>
 
 ```shell
-$ kubectl get pods -n kserve
-NAME                                         READY   STATUS         RESTARTS   AGE
-kserve-controller-manager-66f7fd46fd-86hh9   1/2     ErrImagePull   0          2m4s
+$ kubectl get pods -n cert-manager
+NAME                                       READY   STATUS    RESTARTS   AGE
+cert-manager-5b49d794c9-qb4gx              1/1     Running   0          9m14s
+cert-manager-cainjector-7c4f67d58b-kh99f   1/1     Running   0          9m14s
+cert-manager-webhook-7f95656c46-cnmn9      1/1     Running   0          9m14s
 ```
 
 
 <br/>
 
 ```shell
+$ kubectl get pods -n kserve
+NAME                                         READY   STATUS         RESTARTS   AGE
+kserve-controller-manager-66f7fd46fd-86hh9   1/2     ErrImagePull   0          2m4s
+```
+
+<br/>
+
+```shell
+$ kubectl edit deployment kserve-controller-manager -n kserve
+
+***
+quay.io/brancz/kube-rbac-proxy:v0.13.1
+***
+```
+
+<br/>
+
+```shell
+$ kubectl get pods -n kserve
+NAME                                         READY   STATUS    RESTARTS   AGE
+kserve-controller-manager-785978bd74-xkr94   2/2     Running   0          97s
+```
+
+<br/>
+
+```shell
 $ kubectl create ns ai-app
 $ kubectl apply -f sklearn-iris.yaml
+```
 
-$ kubectl get inferenceservice sklearn-iris -n ai-app --watch
+<br/>
+
+```shell
+$ kubectl get inferenceservice sklearn-iris -n ai-app
+NAME           URL   READY   PREV   LATEST   PREVROLLEDOUTREVISION   LATESTREADYREVISION   AGE
+sklearn-iris                                                                               110s
 ```
