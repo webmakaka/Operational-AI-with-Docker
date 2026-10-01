@@ -13,6 +13,15 @@ $ kubectl apply -f \
 <br/>
 
 ```shell
+$ kubectl get pods -n kserve
+NAME                                         READY   STATUS         RESTARTS   AGE
+kserve-controller-manager-66f7fd46fd-86hh9   1/2     ErrImagePull   0          2m4s
+```
+
+
+<br/>
+
+```shell
 $ kubectl create ns ai-app
 $ kubectl apply -f sklearn-iris.yaml
 
