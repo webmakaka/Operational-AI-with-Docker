@@ -15,10 +15,16 @@ NAME                                READY   STATUS    RESTARTS   AGE
 kuberay-operator-64dd88cdd8-cvdz8   1/1     Running   0          2m4s
 ```
 
+<br/>
+
+```shell
+$ kubectl create ns ai-app
+$ kubectl apply -f hello-ray.yaml
+```
+
 
 <br/>
 
 ```shell
-$ kubectl apply -f hello-ray.yaml
 $ kubectl get rayjob hello-ray -n ai-app --watch
 ```
