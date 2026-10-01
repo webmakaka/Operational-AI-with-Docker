@@ -71,3 +71,23 @@ $ kubectl get inferenceservice sklearn-iris -n ai-app
 NAME           URL                                      READY   PREV   LATEST   PREVROLLEDOUTREVISION   LATESTREADYREVISION   AGE
 sklearn-iris   http://sklearn-iris-ai-app.example.com   True                                                                  107s                                                                     110s
 ```
+
+<br/>
+
+```shell
+$ kubectl run curl-test --image=curlimages/curl:8.10.1 -n ai-app --restart=Never -- sh -c 'curl -s -X POST "http://sklearn-iris-predictor.ai-app.svc.cluster.local/v1/models/sklearn-iris:predict" -H "Content-Type: application/json" -d "{\"instances\": [[6.7, 3.0, 5.2, 2.3]]}"; echo; echo "EXIT=$?"'
+```
+
+<br/>
+
+```shell
+$ kubectl logs curl-test -n ai-app
+{"predictions":[2]}
+EXIT=0
+```
+
+<br/>
+
+```
+$ kubectl delete pod curl-test -n ai-app --ignore-not-found
+```
