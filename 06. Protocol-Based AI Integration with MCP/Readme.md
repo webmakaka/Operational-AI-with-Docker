@@ -2,9 +2,73 @@
 
 https://github.com/docker/mcp-gateway
 
+https://registry.modelcontextprotocol.io/
+
+<br/>
+
+### Installation
+
+```
+$ mkdir -p ~/.docker/cli-plugins/
+
+$ curl -fsSL https://github.com/docker/mcp-gateway/releases/download/v0.44.1/docker-mcp-linux-amd64.tar.gz | tar -xz -C ~/.docker/cli-plugins/
+```
+
+<br/>
+
 ```shell
 $ docker mcp --version
-Docker version 29.8.1, build 4a63305
+v0.44.1
+```
+
+<br/>
+
+```shell
+$ docker mcp catalog create my-local-catalog:latest --from-community-registry registry.modelcontextprotocol.io
+Fetched 24721 servers from registry.modelcontextprotocol.io
+  Total in registry: 38462
+  Imported:          24721
+    OCI (stdio):     828
+    Remote:          23893
+  Skipped:           13741
+    npm:             8739
+    pypi:            3592
+    mcpb:            673
+    no packages:     468
+    nuget:           120
+    oci:             99
+    cargo:           50
+Catalog my-local-catalog:latest created
+```
+
+<br/>
+
+```shell
+$ docker mcp catalog ls
+Reference | Digest | Title
+my-local-catalog:latest	| d874198973d07df35d1402b8b3f1d648e77b78f419c25370092e3090c9c90236	| MCP Community Registry
+```
+
+<br/>
+
+```shell
+$ docker mcp catalog show my-local-catalog 
+```
+
+<br/>
+
+### Enable your first MCP server
+
+<br/>
+
+```
+$ docker mcp profile create --name dev_tools
+```
+
+<br/>
+
+```
+$ docker mcp profile server add dev_tools --server catalog://mcp/docker-mcp-catalog/github-official
 ```
 
 <br/>
