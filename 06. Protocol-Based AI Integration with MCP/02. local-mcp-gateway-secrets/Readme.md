@@ -5,7 +5,7 @@
 ### Step 1. Create a file named .env
 
 ```
-github.personal_access_token=DUMMY=ghp_your_token_here
+github.personal_access_token=ghp_your_token_here
 firecrawl.api_key=fc_your_key_here
 ```
 
