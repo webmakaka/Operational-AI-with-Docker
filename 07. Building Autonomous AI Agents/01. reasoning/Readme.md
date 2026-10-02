@@ -1,8 +1,8 @@
 
 ## Component 1: Reasoning Engine
 
-```
-docker compose up --build
+```shell
+$ docker compose up --build
 ```
 
 ## Results:
@@ -27,8 +27,8 @@ Open http://localhost:8082 in your browser to use the web interface. The interfa
 ## Test the API endpoint
 
 
-```
-curl -X POST http://localhost:8082/api/chat \
+```shell
+$ curl -X POST http://localhost:8082/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Explain Docker in simple terms"}'
 ```
