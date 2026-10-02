@@ -1,5 +1,7 @@
 ## Chapter 6: Protocol-based AI Integration with MCP
 
+https://github.com/docker/mcp-gateway
+
 ```shell
 $ docker mcp --version
 Docker version 29.8.1, build 4a63305
