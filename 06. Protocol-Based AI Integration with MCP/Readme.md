@@ -180,6 +180,8 @@ $ docker mcp profile server ls --filter profile=dev_tools
 
 ### Connecting AI clients
 
+### Running the local MCP gateway for development
+
 <br/>
 
 ## 
