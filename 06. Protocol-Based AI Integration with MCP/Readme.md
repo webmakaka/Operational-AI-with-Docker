@@ -196,7 +196,35 @@ $ docker mcp profile server ls --filter profile=dev_tools
 
 ### [TODO] Connecting AI clients
 
+
+<br/>
+
+```shell
+$ docker mcp gateway run --profile dev_tools
+```
+
+<br/>
+
+```shell
+$ docker mcp tools inspect mcp-find
+```
+
+<br/>
+
 ### [TODO] Running the local MCP gateway for development
+
+```
+$ docker mcp profile config dev_tools --get-all --format yaml
+```
+
+
+http://localhost:8080/sse
+
+
+<br/>
+
+### [TODO] Database integration example
+
 
 <br/>
 
