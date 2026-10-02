@@ -1,8 +1,7 @@
 ## Tool Access Layer
 
-
-```
-docker compose up -build
+```shell
+$ docker compose up -build
 ```
 
 ## Result:
@@ -28,14 +27,14 @@ The gateway launches each MCP server as an isolated Docker container with securi
 
 ### List available tools
 
-```
-curl http://localhost:8811/tools
+```shell
+$ curl http://localhost:8811/tools
 ```
 
 ### Search GitHub repositories (read-only, safe to test)
 
-```
-curl -X POST http://localhost:8811/mcp \
+```shell
+$ curl -X POST http://localhost:8811/mcp \
   -H "Content-Type: application/json" \
   -d '{
     "tool": "search_repositories",
