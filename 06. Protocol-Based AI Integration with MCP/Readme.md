@@ -31,6 +31,7 @@ $ sudo apt-get install -y docker-secrets-engine docker-secrets-engine-plugins
 <br/>
 
 ```shell
+// FAIL!
 $ docker mcp secret ls
 secrets engine is not available: unavailable: dial unix /home/marley/.cache/docker-secrets-engine/engine.sock: connect: no such file or directory
 ```
@@ -193,9 +194,9 @@ $ docker mcp profile server ls --filter profile=dev_tools
 
 <br/>
 
-### Connecting AI clients
+### [TODO] Connecting AI clients
 
-### Running the local MCP gateway for development
+### [TODO] Running the local MCP gateway for development
 
 <br/>
 
