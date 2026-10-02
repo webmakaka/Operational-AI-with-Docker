@@ -80,7 +80,14 @@ $ docker mcp profile create --name dev_tools
 ```shell
 $ docker mcp profile server add dev_tools --server catalog://mcp/docker-mcp-catalog/github-official
 Added 1 server(s) to profile dev_tools
+```
 
+<br/>
+
+```shell
+$ docker mcp profile server ls --filter profile=dev_tools
+PROFILE   | TYPE  | IDENTIFIER     
+dev_tools | image | github-official
 ```
 
 <br/>
