@@ -24,7 +24,8 @@ v0.44.1
 <br/>
 
 ```shell
-$ docker mcp catalog create my-local-catalog:latest --from-community-registry registry.modelcontextprotocol.io
+// Actually not needed
+// $ docker mcp catalog create my-local-catalog:latest --from-community-registry registry.modelcontextprotocol.io
 Fetched 24721 servers from registry.modelcontextprotocol.io
   Total in registry: 38462
   Imported:          24721
@@ -44,15 +45,24 @@ Catalog my-local-catalog:latest created
 <br/>
 
 ```shell
+$ docker mcp catalog pull mcp/docker-mcp-catalog:latest
+$ docker mcp catalog show mcp/docker-mcp-catalog
+```
+
+
+<br/>
+
+```shell
 $ docker mcp catalog ls
 Reference | Digest | Title
+mcp/docker-mcp-catalog:latest	| a72d41e7a13b4ec8bb5756d6bef1dbd620045a114b7aa1e1993a678d8be77f9c	| Docker MCP Catalog
 my-local-catalog:latest	| d874198973d07df35d1402b8b3f1d648e77b78f419c25370092e3090c9c90236	| MCP Community Registry
 ```
 
 <br/>
 
 ```shell
-$ docker mcp catalog show my-local-catalog 
+$ docker mcp catalog show mcp/docker-mcp-catalog
 ```
 
 <br/>
@@ -61,14 +71,16 @@ $ docker mcp catalog show my-local-catalog
 
 <br/>
 
-```
+```shell
 $ docker mcp profile create --name dev_tools
 ```
 
 <br/>
 
-```
+```shell
 $ docker mcp profile server add dev_tools --server catalog://mcp/docker-mcp-catalog/github-official
+Added 1 server(s) to profile dev_tools
+
 ```
 
 <br/>
