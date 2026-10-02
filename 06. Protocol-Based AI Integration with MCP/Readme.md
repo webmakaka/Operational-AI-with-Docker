@@ -6,7 +6,7 @@ https://registry.modelcontextprotocol.io/
 
 <br/>
 
-### Installation
+### Installation and setup
 
 ```
 $ mkdir -p ~/.docker/cli-plugins/
@@ -22,6 +22,8 @@ v0.44.1
 ```
 
 <br/>
+
+### Enable MCP toolkit
 
 ```shell
 // Actually not needed
@@ -94,6 +96,56 @@ Added 1 server(s) to profile dev_tools
 $ docker mcp profile server ls --filter profile=dev_tools
 PROFILE   | TYPE  | IDENTIFIER     
 dev_tools | image | github-official
+```
+
+<br/>
+
+### [SKIP] Managing secrets securely
+
+```shell
+$ echo your_github_pat_here > token.txt
+$ cat token.txt | docker mcp secret set github.personal_access_token
+$ rm token.txt
+```
+
+<br/>
+
+```shell
+$ docker mcp secret ls
+```
+
+<br/>
+
+### Adding filesystem MCP server
+
+```shell
+$ docker mcp profile server add dev_tools --server catalog://mcp/docker-mcp-catalog/filesystem
+```
+
+<br/>
+
+```shell
+$ docker mcp profile server ls --filter profile=dev_tools
+PROFILE   | TYPE  | IDENTIFIER     
+dev_tools | image | filesystem     
+dev_tools | image | github-official
+```
+
+<br/>
+
+### Configuring filesystem paths
+
+<br/>
+
+```shell
+$ docker mcp profile config dev_tools --set filesystem.paths='["/home/marley/Documents", "/home/marley/Pictures"]'
+```
+
+<br/>
+
+```shell
+$ docker mcp profile config dev_tools --get-all
+filesystem.paths=[/home/marley/Documents /home/marley/Pictures]
 ```
 
 <br/>
