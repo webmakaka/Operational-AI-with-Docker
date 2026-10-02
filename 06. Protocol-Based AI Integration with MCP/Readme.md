@@ -45,6 +45,13 @@ Catalog my-local-catalog:latest created
 <br/>
 
 ```shell
+// $ docker mcp catalog rm my-local-catalog:latest
+```
+
+
+<br/>
+
+```shell
 $ docker mcp catalog pull mcp/docker-mcp-catalog:latest
 $ docker mcp catalog show mcp/docker-mcp-catalog
 ```
@@ -56,7 +63,6 @@ $ docker mcp catalog show mcp/docker-mcp-catalog
 $ docker mcp catalog ls
 Reference | Digest | Title
 mcp/docker-mcp-catalog:latest	| a72d41e7a13b4ec8bb5756d6bef1dbd620045a114b7aa1e1993a678d8be77f9c	| Docker MCP Catalog
-my-local-catalog:latest	| d874198973d07df35d1402b8b3f1d648e77b78f419c25370092e3090c9c90236	| MCP Community Registry
 ```
 
 <br/>
@@ -91,6 +97,8 @@ dev_tools | image | github-official
 ```
 
 <br/>
+
+## 
 
  - [Running the local MCP Gateway for development](https://github.com/ajeetraina/Operational-AI-with-Docker/tree/main/chap-06/local-mcp-gateway)
  - [Demonstrating Docker Compose with secrets](https://github.com/ajeetraina/Operational-AI-with-Docker/tree/main/chap-06/local-mcp-gateway-secrets)
