@@ -133,7 +133,7 @@ dev_tools | image | github-official
 
 <br/>
 
-### Configuring filesystem paths
+#### Configuring filesystem paths
 
 <br/>
 
@@ -147,6 +147,38 @@ $ docker mcp profile config dev_tools --set filesystem.paths='["/home/marley/Doc
 $ docker mcp profile config dev_tools --get-all
 filesystem.paths=[/home/marley/Documents /home/marley/Pictures]
 ```
+
+<br/>
+
+### Adding Firecrawl MCP server
+
+```shell
+$ docker mcp profile server add dev_tools --server catalog://mcp/docker-mcp-catalog/firecrawl
+```
+
+<br/>
+
+```shell
+$ echo "fc-your_api_key_here" > firecrawl_key.txt
+$ cat firecrawl_key.txt | docker mcp secret set firecrawl.api_key
+$ rm firecrawl_key.txt
+```
+
+<br/>
+
+```shell
+$ docker mcp secret ls
+```
+
+<br/>
+
+```shell
+$ docker mcp profile server ls --filter profile=dev_tools
+```
+
+<br/>
+
+### Connecting AI clients
 
 <br/>
 
