@@ -43,12 +43,12 @@ A hierarchical multi-agent system that coordinates specialized AI agents to answ
 
 ```bash
 # Start the system
-docker compose up --build
+$ docker compose up --build
 
 # Wait for all agents to start (check logs for "healthy")
 
 # Submit a research question
-curl -X POST http://localhost:8080/api/research \
+$ curl -X POST http://localhost:8080/api/research \
   -H "Content-Type: application/json" \
   -d '{"question": "What are the latest developments in Docker AI?"}'
 
