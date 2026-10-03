@@ -1,8 +1,8 @@
 ## Agent Discovery
 
 
-```
-docker compose up --build
+```shell
+$ docker compose up --build
 ```
 
 Watch the coordinator discover and call the worker:
@@ -22,8 +22,8 @@ coordinator-1 |    Message: Task processed by 640d12fed193
 
 ### Testing dynamic scaling and load balancing
 
-```
-docker compose up -d --scale worker=3
+```shell
+$ docker compose up -d --scale worker=3
 ```
 
 Docker spins up two more workers:
@@ -37,8 +37,8 @@ Docker spins up two more workers:
 
 Watch the coordinator logs to see load balancing in action:
 
-```
-docker compose logs coordinator -f
+```shell
+$ docker compose logs coordinator -f
 ```
 
 At first, all tasks still go to the first worker:
