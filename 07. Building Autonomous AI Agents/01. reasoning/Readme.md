@@ -8,22 +8,17 @@ $ docker compose up --build
 ## Results:
 
 ```
- => => naming to docker.io/library/reasoning-node-genai:latest                              0.0s
- => => unpacking to docker.io/library/reasoning-node-genai:latest                           0.3s
- => resolving provenance for metadata file                                                  0.0s
-[+] up 3/4
- ✔ Image reasoning-node-genai       Built                                                  16.8s
- ⠼ llama                            Configuring                                             0.3s
- ✔ Network reasoning_default        Created                                                 0.0s
- ✔ Container reasoning-node-genai-1 Created                                                 0.2s
+[+] up 3/3
+ ✔ Image 01reasoning-node-genai       Built                                 1.4s
+ ✔ llama                              Configured                            2.2s
+ ✔ Container 01reasoning-node-genai-1 Recreated                             0.1s
 Attaching to node-genai-1
 node-genai-1  | Server starting on http://localhost:8080
-node-genai-1  | Using LLM endpoint: http://model-runner.docker.internal/v1//chat/completions
+node-genai-1  | Using LLM endpoint: http://172.17.0.1:12434/v1//chat/completions
 node-genai-1  | Using model: ai/llama3.2:1B-Q8_0
 ```
 
 Open http://localhost:8082 in your browser to use the web interface. The interface provides a simple chat box where you can interact with the reasoning engine directly. Each message you send gets processed by the LLM, demonstrating how agents use reasoning engines to understand and respond to inputs.
-
 
 <br/>
 
