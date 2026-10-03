@@ -1,8 +1,8 @@
 
 ## Memory and State
 
-```
-docker compose up --build
+```shell
+$ docker compose up --build
 ```
 
 You'll see the agent start with Redis ready:
@@ -25,10 +25,9 @@ You'll see the agent start with Redis ready:
 
 ### Verify memory persistence:
 
-
-```
+```shell
 # List all memory keys
-docker compose exec agent-memory redis-cli KEYS "agent:*"
+$ docker compose exec agent-memory redis-cli KEYS "agent:*"
 ```
 
 ## Result:
@@ -43,9 +42,9 @@ docker compose exec agent-memory redis-cli KEYS "agent:*"
 
 ### You can also view the specific task history:
 
-```
+```shell
 # View specific task history
-docker compose exec agent-memory redis-cli LRANGE agent:task-processor:actions:task-001 0 -1
+$ docker compose exec agent-memory redis-cli LRANGE agent:task-processor:actions:task-001 0 -1
 ```
 
 ### Result:
