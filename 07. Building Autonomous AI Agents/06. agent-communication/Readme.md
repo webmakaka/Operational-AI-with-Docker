@@ -1,8 +1,7 @@
 ## Designing agent communication patterns
 
-
-```
-docker compose up --build
+```shell
+$ docker compose up --build
 ```
 
 ### Watch the writer publishing events every 5 seconds:
@@ -41,8 +40,8 @@ reader-1  |    Processing patch...
 What happens when you scale readers? Stop the system with Ctrl+C, then restart with three readers:
 
 
-```
-docker compose up --build --scale reader=3
+```shell
+$ docker compose up --build --scale reader=3
 ```
 
 Now watch—all three readers receive the same events:
