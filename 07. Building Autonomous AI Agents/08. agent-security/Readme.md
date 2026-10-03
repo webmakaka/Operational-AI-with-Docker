@@ -1,7 +1,7 @@
 ## Agent Security
 
 ```
-docker compose up --build
+$ docker compose up --build
 ```
 
 Watch the agent test security boundaries:
@@ -19,7 +19,7 @@ Watch the agent test security boundaries:
 
 ```
 # Test read-only filesystem
-docker compose exec secure-agent touch /test.txt
+$ docker compose exec secure-agent touch /test.txt
 ```
 
 The filesystem blocks it:
@@ -31,7 +31,7 @@ touch: cannot touch '/test.txt': Read-only file system
  Now test that tmpfs actually works:
 
 ```
-docker compose exec secure-agent touch /tmp/test.txt && echo "✅ tmpfs write succeeded"
+$ docker compose exec secure-agent touch /tmp/test.txt && echo "✅ tmpfs write succeeded"
 ```
 
 This succeeds:
@@ -44,7 +44,7 @@ This succeeds:
 
 ```
 # Get all completed tasks with metrics
-docker compose logs secure-agent | grep -o '{.*}' | jq 'select(.message == "Task completed") | {task_id, duration}'
+$ docker compose logs secure-agent | grep -o '{.*}' | jq 'select(.message == "Task completed") | {task_id, duration}'
 ```
 
 This returns clean task metrics:
