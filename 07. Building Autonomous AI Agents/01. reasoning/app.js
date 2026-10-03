@@ -74,7 +74,7 @@ async function callLLMAPI(userMessage) {
             chatRequest,
             {
                 headers: { 'Content-Type': 'application/json' },
-                timeout: 60000 // 60 seconds
+                timeout: 180000 // 180 seconds
             }
         );
         
