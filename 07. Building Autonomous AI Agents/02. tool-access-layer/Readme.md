@@ -17,6 +17,33 @@ $ cp mcp-secrets.env.template mcp-secrets.env
 
 <br/>
 
+### github-official
+
+```yaml
+services:
+  mcp-gateway:
+    image: docker/mcp-gateway:v0.44.1
+    command:
+      - --servers=github-official
+      - --transport=streaming
+      - --secrets=/run/secrets/mcp_secrets      
+      - --port=8811      
+#      - --servers=slack
+#      - --servers=kubernetes
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8811:8811"
+    secrets:
+      - mcp_secrets
+secrets:
+  mcp_secrets:
+    file: ./mcp-secrets.env
+```
+
+
+<br/>
+
 ```shell
 $ docker compose up --build
 ```
@@ -126,6 +153,33 @@ ui_get
 update_issue_comment
 update_pull_request
 update_pull_request_branch
+```
+
+
+<br/>
+
+### kubernetes
+
+```yaml
+services:
+  mcp-gateway:
+    image: docker/mcp-gateway:v0.44.1
+    command:
+#      - --servers=github-official
+      - --transport=streaming
+      - --secrets=/run/secrets/mcp_secrets      
+      - --port=8811      
+#      - --servers=slack
+      - --servers=kubernetes
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8811:8811"
+    secrets:
+      - mcp_secrets
+secrets:
+  mcp_secrets:
+    file: ./mcp-secrets.env
 ```
 
 
