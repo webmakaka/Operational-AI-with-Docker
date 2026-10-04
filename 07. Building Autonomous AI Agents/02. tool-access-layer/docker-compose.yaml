@@ -4,6 +4,7 @@ services:
     command:
       - --servers=github-official
       - --transport=streaming
+      - --secrets=/run/secrets/mcp_secrets      
       - --port=8811      
 #      - --servers=slack
 #      - --servers=kubernetes
