@@ -45,14 +45,89 @@ The gateway launches each MCP server as an isolated Docker container with securi
 ### List available tools
 
 ```shell
-// $ curl http://localhost:8811/tools
+$ read -rsp 'Gateway token: ' TOKEN; echo
 
-$ TOKEN='oazijrcg4b2aw611sidcs7ha540i3mh5nid7dtjkqunsixvrxz'
-
-$ curl -N -i \
+$ curl -sS -D /tmp/mcp-headers -o /tmp/mcp-init \
+  -X POST http://localhost:8811/mcp \
   -H "Authorization: Bearer $TOKEN" \
-  http://localhost:8811/mcp
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json, text/event-stream' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"curl","version":"1.0"}}}'
+
+$ SESSION_ID=$(awk 'tolower($1)=="mcp-session-id:" {gsub("\r","",$2); print $2}' /tmp/mcp-headers)
+$ printf 'Session: %s\n' "$SESSION_ID"
+$ cat /tmp/mcp-init
 ```
+
+```shell
+$ curl -sS -X POST http://localhost:8811/mcp \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Mcp-Session-Id: $SESSION_ID" \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json, text/event-stream' \
+  -d '{"jsonrpc":"2.0","method":"notifications/initialized"}'
+
+$ curl -sS -X POST http://localhost:8811/mcp \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Mcp-Session-Id: $SESSION_ID" \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json, text/event-stream' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}' \
+  | sed -n 's/^data: //p' \
+  | jq -r '.result.tools[].name'
+```
+
+<br/>
+
+```
+add_comment_to_pending_review
+add_issue_comment
+add_reply_to_pull_request_comment
+assign_copilot_to_issue
+create_branch
+create_or_update_file
+create_pull_request
+create_repository
+delete_file
+fork_repository
+get_commit
+get_file_contents
+get_label
+get_latest_release
+get_me
+get_release_by_tag
+get_tag
+get_team_members
+get_teams
+issue_read
+issue_write
+list_branches
+list_commits
+list_issue_fields
+list_issue_types
+list_issues
+list_pull_requests
+list_releases
+list_repository_collaborators
+list_tags
+merge_pull_request
+pull_request_read
+pull_request_review_write
+push_files
+request_copilot_review
+search_code
+search_commits
+search_issues
+search_pull_requests
+search_repositories
+search_users
+sub_issue_write
+ui_get
+update_issue_comment
+update_pull_request
+update_pull_request_branch
+```
+
 
 <br/>
 
