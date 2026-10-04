@@ -45,8 +45,16 @@ The gateway launches each MCP server as an isolated Docker container with securi
 ### List available tools
 
 ```shell
-$ curl http://localhost:8811/tools
+// $ curl http://localhost:8811/tools
+
+$ TOKEN='oazijrcg4b2aw611sidcs7ha540i3mh5nid7dtjkqunsixvrxz'
+
+$ curl -N -i \
+  -H "Authorization: Bearer $TOKEN" \
+  http://localhost:8811/mcp
 ```
+
+<br/>
 
 ### Search GitHub repositories (read-only, safe to test)
 
