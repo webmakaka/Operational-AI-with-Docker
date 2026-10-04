@@ -12,6 +12,12 @@ secrets engine is not available: unavailable: dial unix /home/marley/.cache/dock
 <br/>
 
 ```shell
+$ cp mcp-secrets.env.template mcp-secrets.env
+```
+
+<br/>
+
+```shell
 $ docker compose up --build
 ```
 
