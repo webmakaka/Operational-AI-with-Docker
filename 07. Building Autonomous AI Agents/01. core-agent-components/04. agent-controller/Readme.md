@@ -1,4 +1,4 @@
-# Agent Controller - Multi-Agent Orchestration System
+## Component 4: Agent Controller (Multi-Agent Orchestration System)
 
 A complete working example of an **Agent Controller** that manages multiple autonomous agents, coordinates tasks, and provides real-time monitoring.
 
