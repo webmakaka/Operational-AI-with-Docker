@@ -95,15 +95,66 @@ The web dashboard at `http://localhost:8001` shows:
 
 ```bash
 // Get all agents
-$ curl http://localhost:8000/api/agents
+$ curl http://localhost:8001/api/agents
+[
+  {
+    "last_heartbeat": "2026-10-05T06:00:43.341709",
+    "name": "worker-1",
+    "registered_at": "2026-10-05T05:47:32.676292",
+    "status": "active",
+    "tasks_completed": 3,
+    "tasks_failed": 0,
+    "type": "data-processor"
+  },
+  {
+    "last_heartbeat": "2026-10-05T06:00:34.048558",
+    "name": "worker-2",
+    "registered_at": "2026-10-05T05:47:32.677491",
+    "status": "active",
+    "tasks_completed": 3,
+    "tasks_failed": 0,
+    "type": "analyst"
+  }
+]
+```
 
+<br/>
+
+```
 // Register a new agent
-$ curl -X POST http://localhost:8000/api/agents/register \
+$ curl -X POST http://localhost:8001/api/agents/register \
   -H "Content-Type: application/json" \
   -d '{"name": "worker-3", "type": "specialist"}'
+```
 
+<br/>
+
+```json
+{
+  "last_heartbeat": "2026-10-05T06:01:36.637147",
+  "name": "worker-3",
+  "registered_at": "2026-10-05T06:01:36.637141",
+  "status": "active",
+  "tasks_completed": 0,
+  "tasks_failed": 0,
+  "type": "specialist"
+}
+
+```
+
+<br/>
+
+```
 // Send heartbeat
-$ curl -X POST http://localhost:8000/api/agents/worker-1/heartbeat
+$ curl -X POST http://localhost:8001/api/agents/worker-1/heartbeat
+```
+
+<br/>
+
+```json
+{
+  "status": "ok"
+}
 ```
 
 <br/>
@@ -112,30 +163,89 @@ $ curl -X POST http://localhost:8000/api/agents/worker-1/heartbeat
 
 ```bash
 // Get task queue
-curl http://localhost:8001/api/tasks
+$ curl http://localhost:8001/api/tasks
+```
 
+<br/>
+
+```
 // Assign a new task
 $ curl -X POST http://localhost:8001/api/tasks/assign \
   -H "Content-Type: application/json" \
   -d '{"id": "task-123", "description": "Analyze data", "type": "analyst"}'
+```
 
+<br/>
+
+```json
+{
+  "assigned_type": "analyst",
+  "created_at": "2026-10-05T06:03:02.545649",
+  "description": "Analyze data",
+  "id": "task-123",
+  "status": "pending"
+}
+```
+
+<br/>
+
+```
 // Agent requests next task
 $ curl -X POST http://localhost:8001/api/tasks/dequeue \
   -H "Content-Type: application/json" \
   -d '{"agent_name": "worker-1"}'
+```
 
+<br/>
+
+```json
+{
+  "status": "no_tasks"
+}
+```
+
+<br/>
+
+```
 // Mark task complete
 $ curl -X POST http://localhost:8001/api/tasks/task-123/complete \
   -H "Content-Type: application/json" \
   -d '{"success": true, "result": "Analysis complete"}'
 ```
 
+<br/>
+
+```json
+{
+  "status": "ok"
+}
+```
+
+<br/>
+
 ### System Stats
 
 ```bash
 // Get system statistics
-$ curl http://localhost:8000/api/stats
+$ curl http://localhost:8001/api/stats
 ```
+
+<br/>
+
+
+```json
+{
+  "active_agents": 2,
+  "inactive_agents": 1,
+  "pending_tasks": 0,
+  "success_rate": 100.0,
+  "total_agents": 3,
+  "total_completed": 7,
+  "total_failed": 0
+}
+```
+
+<br/>
 
 ## Testing the System
 
