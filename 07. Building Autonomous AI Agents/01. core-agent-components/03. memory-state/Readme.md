@@ -1,4 +1,4 @@
-# Memory and State
+## Component 3: Memory and State
 
 ```shell
 $ docker compose up --build
