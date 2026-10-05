@@ -89,6 +89,8 @@ The web dashboard at `http://localhost:8001` shows:
 
 **Auto-refreshes every 5 seconds!**
 
+<br/>
+
 ## REST API
 
 ### Agent Management
@@ -164,6 +166,12 @@ $ curl -X POST http://localhost:8001/api/agents/worker-1/heartbeat
 ```bash
 // Get task queue
 $ curl http://localhost:8001/api/tasks
+```
+
+<br/>
+
+```json
+[]
 ```
 
 <br/>
@@ -256,9 +264,9 @@ $ curl http://localhost:8001/api/stats
 $ docker compose up -d
 
 // Wait a few seconds, then check
-$ curl http://localhost:8000/api/agents | jq
+$ curl http://localhost:8001/api/agents | jq
 
-# Expected: 2 agents (worker-1, worker-2)
+// Expected: 2 agents (worker-1, worker-2)
 ```
 
 <br/>
