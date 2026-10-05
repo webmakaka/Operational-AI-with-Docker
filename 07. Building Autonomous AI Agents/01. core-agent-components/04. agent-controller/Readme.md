@@ -16,9 +16,9 @@ A complete working example of an **Agent Controller** that manages multiple auto
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│              Agent Controller                        │
+│              Agent Controller                       │
 │  - REST API (port 8000)                             │
-│  - Web Dashboard                                     │
+│  - Web Dashboard                                    │
 │  - Task Queue Management                            │
 │  - Agent Health Monitoring                          │
 └──────────────┬──────────────────────────────────────┘
