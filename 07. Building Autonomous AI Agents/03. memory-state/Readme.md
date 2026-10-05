@@ -23,33 +23,42 @@ You'll see the agent start with Redis ready:
  ✔ Container memory-state-task-agent-1 Created
 ```
 
+<br/>
+
 ### Verify memory persistence:
 
 ```shell
-# List all memory keys
+// List all memory keys
 $ docker compose exec agent-memory redis-cli KEYS "agent:*"
 ```
 
+<br/>
+
 ## Result:
 
+```
+1) "agent:task-processor:actions:task-001"
+```
 
-```
-1) "agent:task-processor:actions:task-003"
-2) "agent:task-processor:actions:task-002"
-3) "agent:task-processor:actions:task-004"
-4) "agent:task-processor:actions:task-001"
-```
+<br/>
 
 ### You can also view the specific task history:
 
 ```shell
-# View specific task history
-$ docker compose exec agent-memory redis-cli LRANGE agent:task-processor:actions:task-001 0 -1
+// View specific task history
+$ docker compose exec agent-memory redis-cli LRANGE agent:task-processor:actions:task-001 0 -1 | jq
 ```
+
+<br/>
 
 ### Result:
 
-```
-"{\"action\": \"Identify the source of customer feedback data.\", \"result\": \"Successfully completed: Identify the source of customer feedback data.\", \"success\": true, \"timestamp\": \"2025-12-27T14:13:42.205306\"}"
+```json
+{
+  "action": "Extract key insights from the customer feedback data using statistical techniques, such as correlation analysis and clustering, to identify trends and patterns.",
+  "result": "Successfully completed: Extract key insights from the customer feedback data using statistical techniques, such as correlation analysis and clustering, to identify trends and patterns.",
+  "success": true,
+  "timestamp": "2026-10-05T01:14:01.061978"
+}
 ```
 
