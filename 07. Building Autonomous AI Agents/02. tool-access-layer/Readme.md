@@ -187,6 +187,8 @@ secrets:
 
 ### [FAIL!] Search GitHub repositories (read-only, safe to test)
 
+This searches for Docker-related Go repositories with more than 1000 stars.
+
 ```shell
 $ curl -X POST http://localhost:8811/mcp \
   -H "Content-Type: application/json" \
