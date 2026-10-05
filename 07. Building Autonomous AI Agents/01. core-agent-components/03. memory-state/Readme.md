@@ -1,5 +1,4 @@
-
-## Memory and State
+# Memory and State
 
 ```shell
 $ docker compose up --build
@@ -62,6 +61,13 @@ $ docker compose exec agent-memory redis-cli LRANGE agent:task-processor:actions
 }
 ```
 
+
+<br/>
+
+```shell
+$ ./test-memory.sh
+```
+
 <br/>
 
 
@@ -69,6 +75,7 @@ $ docker compose exec agent-memory redis-cli LRANGE agent:task-processor:actions
 
 <img src="../../../img/pic07-01-agent-memory-comparison.png" alt="Memory and State">
 
+<br/>
 
 # Manual Verification Guide
 
