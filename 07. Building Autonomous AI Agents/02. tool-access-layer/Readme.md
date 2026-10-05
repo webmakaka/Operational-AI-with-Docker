@@ -158,7 +158,7 @@ update_pull_request_branch
 
 <br/>
 
-### kubernetes
+### [FAIL!] kubernetes
 
 ```yaml
 services:
@@ -185,7 +185,7 @@ secrets:
 
 <br/>
 
-### Search GitHub repositories (read-only, safe to test)
+### [FAIL!] Search GitHub repositories (read-only, safe to test)
 
 ```shell
 $ curl -X POST http://localhost:8811/mcp \
