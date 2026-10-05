@@ -1,4 +1,4 @@
-## Tool Access Layer
+## Component 2: Tool Access Layer
 
 https://hub.docker.com/r/docker/mcp-gateway/tags
 
