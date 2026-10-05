@@ -49,9 +49,16 @@ $ docker compose up --build
 <br/>
 
 ```
-// [FAIL!] Access the dashboard
-open http://localhost:8000
+// Access the dashboard
+open http://localhost:8001
 ```
+
+<br/>
+
+<img src="../../../img/pic07-02.png" alt="Agent Controller">
+
+<br/>
+
 
 **You should see:**
 - Controller starts and creates demo tasks
