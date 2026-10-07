@@ -13,7 +13,7 @@ This demonstrates the key benefits of multi-container agent architectures:
 ## Run the Test
 
 ```bash
-docker compose up --build
+$ docker compose up --build
 ```
 
 ## What You'll See
@@ -26,38 +26,44 @@ docker compose up --build
 ## Verify Isolation
 
 ### Check volumes (isolated state):
+
 ```bash
-docker volume ls
+$ docker volume ls
 ```
 
 You should see:
+
 - `multi-agent-architecture_bug-tracker-state`
 - `multi-agent-architecture_reporter-state`
 - `multi-agent-architecture_shared-memory`
 
 ### Check Redis (shared coordination):
+
 ```bash
-docker compose exec agent-memory redis-cli KEYS "agent:*"
+$ docker compose exec agent-memory redis-cli KEYS "agent:*"
 ```
 
 You should see:
+
 - `agent:bug-tracker:state`
 - `agent:status-reporter:state`
 
 ### View agent states:
+
 ```bash
-docker compose exec agent-memory redis-cli GET "agent:bug-tracker:state"
-docker compose exec agent-memory redis-cli GET "agent:status-reporter:state"
+$ docker compose exec agent-memory redis-cli GET "agent:bug-tracker:state"
+$ docker compose exec agent-memory redis-cli GET "agent:status-reporter:state"
 ```
 
 ## Test Auto-Recovery
 
 Kill an agent and watch it restart:
+
 ```bash
-docker compose kill bug-tracker
-docker compose ps
+$ docker compose kill bug-tracker
+$ docker compose ps
 # Wait 5-10 seconds
-docker compose ps
+$ docker compose ps
 # bug-tracker should be back up
 ```
 
@@ -66,24 +72,28 @@ docker compose ps
 The agents resume from their last state after restarts. Let's test this:
 
 ### Check current state:
+
 ```bash
-docker compose exec agent-memory redis-cli GET "agent:bug-tracker:state"
-docker compose exec agent-memory redis-cli GET "agent:status-reporter:state"
+$ docker compose exec agent-memory redis-cli GET "agent:bug-tracker:state"
+$ docker compose exec agent-memory redis-cli GET "agent:status-reporter:state"
 ```
 
 Note the iteration numbers (e.g., iteration 50).
 
 ### Restart one agent:
+
 ```bash
-docker compose restart bug-tracker
+$ docker compose restart bug-tracker
 ```
 
 ### Watch it resume:
+
 ```bash
-docker compose logs bug-tracker --tail 20 -f
+$ docker compose logs bug-tracker --tail 20 -f
 ```
 
 You should see:
+
 ```
 🤖 Starting bug-tracker (monitoring)
 📥 Resuming from iteration 51
@@ -93,19 +103,20 @@ You should see:
 The agent picked up where it left off!
 
 ### Test full restart:
+
 ```bash
 # Stop everything
-docker compose down
+$ docker compose down
 
 # Volumes persist (check)
-docker volume ls | grep multi-agent
+$ docker volume ls | grep multi-agent
 
 # Restart everything
-docker compose up -d
+$ docker compose up -d
 
 # Both agents resume from their last iteration
-docker compose logs bug-tracker --tail 10
-docker compose logs status-reporter --tail 10
+$ docker compose logs bug-tracker --tail 10
+$ docker compose logs status-reporter --tail 10
 ```
 
 Both agents should show "📥 Resuming from iteration X" messages.
@@ -113,5 +124,5 @@ Both agents should show "📥 Resuming from iteration X" messages.
 ## Cleanup
 
 ```bash
-docker compose down -v
+$ docker compose down -v
 ```
