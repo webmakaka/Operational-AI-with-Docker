@@ -41,9 +41,15 @@ A complete working example of an **Agent Controller** that manages multiple auto
 
 ## Quick Start
 
-```bash
+```shell
 // Start the entire system
 $ docker compose up --build
+```
+
+<br/>
+
+```shell
+$ docker compose ps
 ```
 
 <br/>
