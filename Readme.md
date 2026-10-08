@@ -33,8 +33,7 @@ You'll work hands-on with Docker Desktop, Docker Model Runner, MCP Gateway, Dock
 
 You don't need to be an AI expert, but you should be comfortable on the command line. Specifically:
 
-- **Docker Desktop** (4.40+) with **Model Runner** enabled — required for chapters 2 onwards
-- **Docker Compose v2** (ships with Docker Desktop)
+- **Docker + Compose v2**
 - **Git** to clone the repo
 - **~16 GB RAM** recommended if you want to run local LLMs comfortably; a GPU helps but isn't required
 - **kubectl** and a local Kubernetes cluster (Docker Desktop's built-in k8s, `kind`, or `minikube`) — only needed for chapters 5 and 9
