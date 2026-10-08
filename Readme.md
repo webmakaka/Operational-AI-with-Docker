@@ -1,55 +1,63 @@
-# [Book] [Ajeet Singh Raina, Harsh Manvar] Operational AI with Docker: LLMOps, Agents and Multi-Model Systems with Docker and Kubernetes [ENG, 2026]
+# [Book] [Ajeet Singh Raina, Harsh Manvar] Практическое внедрение ИИ с Docker: LLMOps, агенты и мультимодельные системы на Docker и Kubernetes [ENG, 2026]
 
 <img src="./img/Operational-AI-with-Docker-Cover.webp" alt="Operational AI with Docker" height="512px" align="right">
 
-> Build, deploy and scale production-ready AI applications using Docker's integrated AI toolkit.
+> Создавайте, развёртывайте и масштабируйте готовые к эксплуатации ИИ-приложения с помощью интегрированного набора инструментов Docker для работы с ИИ.
 
 **Original src:**  
 https://github.com/PacktPublishing/Operational-AI-with-Docker
 
-This book is for DevOps engineers, platform engineers, AI/ML engineers, solutions architects and developers who want to operationalize AI applications. Whether you're deploying your first LLM or building complex multi-agent systems, this book provides practical guidance for production AI with Docker.
+Эта книга предназначена для DevOps-инженеров, инженеров платформ, специалистов по ИИ и машинному обучению, архитекторов решений и разработчиков, которые хотят внедрять ИИ-приложения в рабочую среду. Независимо от того, разворачиваете ли вы свою первую большую языковую модель (LLM) или создаёте сложные системы с несколькими ИИ-агентами, в этой книге вы найдёте практические рекомендации по использованию Docker для запуска ИИ-приложений в production.
 
-## What this book is about
+## О чём эта книга
 
-If you've ever wanted to take an AI app from "works on my laptop" to something you can actually run in production, this book is for you. It walks through the full lifecycle running local LLMs, wiring them into real applications, integrating external tools through MCP, building autonomous agents and finally orchestrating fleets of agents on Kubernetes all using Docker's AI tooling.
+Если вы когда-нибудь хотели превратить ИИ-приложение из «у меня на ноутбуке работает» в приложение, которое действительно можно запустить в production, эта книга для вас. В ней рассматривается весь жизненный цикл: запуск локальных больших языковых моделей (LLM), подключение их к реальным приложениям, интеграция внешних инструментов через MCP, создание автономных агентов и, наконец, оркестрация целых групп агентов в Kubernetes — с помощью инструментов Docker для работы с ИИ.
 
-You'll work hands-on with Docker Desktop, Docker Model Runner, MCP Gateway, Docker Hardened Images, kagent and you'll see how the same containers you already know can carry AI workloads safely and at scale.
+Вы будете на практике работать с Docker Desktop, Docker Model Runner, MCP Gateway, Docker Hardened Images и kagent. Вы также узнаете, как знакомые вам контейнеры могут безопасно и масштабно запускать ИИ-нагрузки.
 
-## Chapter guide
+## Путеводитель по главам
 
-| #   | Chapter                                   | What's inside                                                                                                                                                                                                                                                        |
-| --- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Introduction to Containerisation for AI   | Docker fundamentals through an AI/ML lens — images, containers, registries and how containers compare to VMs. Two small examples (`tiny-service-container`, `tiny-training-run`) get you comfortable with `docker run` and `docker build` before things get serious. |
-| 2   | Understanding AI Models in Docker         | The bridge between "I know Docker" and "I know how to ship models". Covers OCI artifacts, GGUF format, quantization and the new Compose `models:` provider syntax for declaring model dependencies alongside your services.                                          |
-| 3   | Model Serving with Docker Model Runner    | The heart of the local-LLM workflow. Pull models from Docker Hub, hit them with the OpenAI-compatible API, build a React chatbot and wire up Prometheus, Grafana and Jaeger for observability. Includes Python and JavaScript SDK examples.                          |
-| 4   | Docker Offload                            | Push the heavy stuff — model export, quantization, batch jobs — into purpose-built containers so your main app stays snappy. Includes a working `export_and_quantize.py` pipeline.                                                                                   |
-| 5   | Running ML Container Models on Kubernetes | Take your containerized models to a real cluster. Manifests, resource limits, autoscaling and a small ML ecosystem you can deploy end to end.                                                                                                                        |
-| 6   | Protocol-Based AI Integration with MCP    | Give your models hands. Use Docker MCP Gateway and the MCP Catalog (270+ servers) to connect AI to databases, APIs and tools — with proper isolation, secret management and OAuth.                                                                                   |
-| 7   | Building Autonomous AI Agents             | Move from "AI that answers" to "AI that does". Container-isolated agents, agent-to-agent communication, discovery, memory/state, reasoning, tool access and sandboxing — each in its own subfolder.                                                                  |
-| 8   | Multi-Model and Multi-Agent Architectures | When one agent isn't enough. Route tasks by complexity, coordinate specialized models and build a working multi-agent research assistant.                                                                                                                            |
-| 9   | Advanced Agent Orchestration              | Securing agent execution using Docker Sandboxes. Declarative agent teams with Docker Agent. Production-grade fleets on Kubernetes with `kagent`. Auto-registration, peer discovery, distributed tracing and sandboxed execution patterns for real workloads.         |
 
-## Prerequisites
+| № | Глава | Содержание |
+|---|---|---|
+| 1 | **Введение в контейнеризацию для ИИ** | Основы Docker с точки зрения ИИ и машинного обучения: образы, контейнеры, реестры и сравнение контейнеров с виртуальными машинами. Два небольших примера (`tiny-service-container` и `tiny-training-run`) помогут освоить `docker run` и `docker build`, прежде чем перейти к более сложным задачам. |
+| 2 | **Знакомство с моделями ИИ в Docker** | Переход от «я знаю Docker» к «я умею развёртывать модели». Рассматриваются артефакты OCI, формат GGUF, квантование и новый синтаксис `models:` в Compose для объявления зависимостей от моделей наряду с сервисами. |
+| 3 | **Обслуживание моделей с помощью Docker Model Runner** | Основа локального рабочего процесса с LLM. Вы научитесь загружать модели из Docker Hub, обращаться к ним через API, совместимый с OpenAI, создавать чат-бота на React и подключать Prometheus, Grafana и Jaeger для наблюдаемости. Включены примеры SDK для Python и JavaScript. |
+| 4 | **Docker Offload** | Перенос ресурсоёмких задач — экспорта моделей, квантования и пакетной обработки — в специализированные контейнеры, чтобы основное приложение работало быстро. Включён готовый конвейер `export_and_quantize.py`. |
+| 5 | **Запуск контейнерных моделей машинного обучения в Kubernetes** | Развёртывание контейнеризированных моделей в реальном кластере. Манифесты, ограничения ресурсов, автомасштабирование и небольшая экосистема машинного обучения, которую можно развернуть целиком. |
+| 6 | **Интеграция ИИ на основе протоколов с MCP** | Модели получают возможность выполнять действия. С помощью Docker MCP Gateway и каталога MCP, включающего более 270 серверов, вы подключите ИИ к базам данных, API и инструментам — с надлежащей изоляцией, управлением секретами и поддержкой OAuth. |
+| 7 | **Создание автономных ИИ-агентов** | Переход от «ИИ, который отвечает» к «ИИ, который действует». Рассматриваются изолированные в контейнерах агенты, взаимодействие между агентами, обнаружение, память и состояние, рассуждение, доступ к инструментам и песочницы. Каждая тема вынесена в отдельную подпапку. |
+| 8 | **Архитектуры с несколькими моделями и агентами** | Что делать, когда одного агента недостаточно: маршрутизация задач по сложности, координация специализированных моделей и создание работающего исследовательского помощника на основе нескольких агентов. |
+| 9 | **Продвинутая оркестрация агентов** | Защита выполнения агентов с помощью Docker Sandboxes. Декларативные команды агентов на базе Docker Agent. Развёртывание производственных групп агентов в Kubernetes с помощью `kagent`. Автоматическая регистрация, обнаружение узлов, распределённая трассировка и выполнение в песочнице для реальных рабочих нагрузок. |
+       |
 
-You don't need to be an AI expert, but you should be comfortable on the command line. Specifically:
+<br/>
 
-- **Docker + Compose v2**
-- **Git** to clone the repo
-- **~16 GB RAM** recommended if you want to run local LLMs comfortably; a GPU helps but isn't required
-- **kubectl** and a local Kubernetes cluster (Docker Desktop's built-in k8s, `kind`, or `minikube`) — only needed for chapters 5 and 9
-- A basic grasp of Docker and what an LLM is. That's it.
+## Необходимые знания и инструменты
 
-The examples are tested on macOS, Windows and Linux.
+Вам не нужно быть экспертом по ИИ, но важно уверенно пользоваться командной строкой. Понадобятся:
 
-## What you'll learn
+**[!!!] Docker Desktop не использую, поэтому не все работает как в книге!** 
 
-- Run and optimize local LLMs with Docker Model Runner
-- Integrate AI applications with external systems using MCP (Model Context Protocol)
-- Deploy MCP servers securely with Docker MCP Gateway
-- Build autonomous AI agents with multi-agent architectures
-- Implement production security with Docker Hardened Images
-- Monitor AI workloads with Prometheus and Grafana
-- Integrate AI with GitHub, Slack, Kubernetes and databases
-- Scale AI applications from development to production
-- Implement enterprise security patterns for AI deployments
-- Automate AI workflows with Docker Compose and orchestration
+Было бы круто получить исправления в тех местах, где из-за этого не запускается.
+
+- **Docker и Compose v2**
+- **Git** для клонирования репозитория
+- **Около 16 ГБ оперативной памяти** — рекомендуется для комфортного запуска локальных LLM. Видеокарта поможет, но не обязательна.
+- **`kubectl` и локальный кластер Kubernetes** — встроенный Kubernetes в Docker Desktop, `kind` или `minikube`. Это понадобится только для глав 5 и 9.
+- Базовое понимание Docker и того, что такое LLM. Этого достаточно.
+
+Примеры проверены на macOS, Windows и Linux.
+
+## Чему вы научитесь
+
+- Запускать и оптимизировать локальные LLM с помощью Docker Model Runner.
+- Интегрировать ИИ-приложения с внешними системами через MCP (Model Context Protocol).
+- Безопасно развёртывать MCP-серверы с помощью Docker MCP Gateway.
+- Создавать автономных ИИ-агентов и архитектуры с несколькими агентами.
+- Обеспечивать безопасность production-среды с помощью Docker Hardened Images.
+- Отслеживать работу ИИ-нагрузок с помощью Prometheus и Grafana.
+- Интегрировать ИИ с GitHub, Slack, Kubernetes и базами данных.
+- Масштабировать ИИ-приложения от разработки до production.
+- Применять корпоративные подходы к защите ИИ-развёртываний.
+- Автоматизировать рабочие процессы ИИ с помощью Docker Compose и инструментов оркестрации.
