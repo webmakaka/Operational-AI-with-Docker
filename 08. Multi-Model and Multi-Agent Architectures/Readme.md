@@ -1,17 +1,21 @@
-# Chapter 08: Multi-Model and Multi-Agent Architectures
+# Глава 08. Архитектуры с несколькими моделями и агентами
 
-
-### Firecrawl API key
+### Ключ API Firecrawl
 
 https://firecrawl.dev/
 
+Мы создадим исследовательского помощника, который умеет искать информацию в интернете, анализировать результаты и составлять связные отчёты. Он будет состоять из четырёх специализированных сервисов: координатора, поискового агента, аналитика и автора.
 
-We're going to build a research assistant that can actually search the web, analyze results, and write coherent reports. The multi-agent research assistant will be composed of four specialized services: a coordinator, searcher, analyzer, and writer. We will begin by understanding why breaking the system into multiple agents provides scalability, cost efficiency, and easier debugging compared to a monolithic approach. Then, we will define the overall architecture, where agents communicate through Redis and HTTP APIs, and implement the full project structure using Docker Compose. Each agent is built as an independent Flask service with its own responsibility: the coordinator plans research queries, the searcher retrieves web data using the Firecrawl API, the analyzer extracts structured insights from results, and the writer generates a polished research report. We will configure different models for each role, containerize the agents with Dockerfiles, and orchestrate everything with Compose. Finally, we will test the full pipeline and trace the end-to-end execution flow to understand how the agents collaborate to produce a final answer.
+Сначала разберёмся, почему разделение системы на несколько агентов обеспечивает лучшую масштабируемость, снижает затраты и упрощает отладку по сравнению с монолитной архитектурой. Затем определим общую архитектуру: агенты будут взаимодействовать через Redis и HTTP API. После этого с помощью Docker Compose создадим структуру всего проекта.
+
+Каждый агент будет работать как независимый сервис Flask со своей задачей: координатор планирует поисковые запросы, поисковый агент получает данные из интернета с помощью API Firecrawl, аналитик извлекает из результатов структурированные выводы, а автор готовит итоговый отчёт. Мы настроим для каждой роли подходящую модель, упакуем агентов в контейнеры с помощью Dockerfile и будем управлять ими через Compose.
+
+В завершение проверим весь конвейер и проследим выполнение запроса от начала до конца, чтобы понять, как агенты взаимодействуют при подготовке итогового ответа.
 
 <br/>
 
-<img src="..//img/pic08-01.png" alt="Multi-Model and Multi-Agent Architectures">
+<img src="..//img/pic08-01.png" alt="Архитектуры с несколькими моделями и агентами">
 
 <br/>
 
-This is a real multi-agent system. Each agent has a specific job, uses the right model for that job, and can be scaled independently.
+Это полноценная мультиагентная система. У каждого агента своя задача и подходящая для неё модель; кроме того, каждого агента можно масштабировать независимо.
