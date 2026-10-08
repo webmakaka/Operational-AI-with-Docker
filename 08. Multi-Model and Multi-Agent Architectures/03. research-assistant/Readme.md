@@ -84,3 +84,32 @@ Redis stores:
 - Final report
 
 This allows agents to remain stateless and enables async processing.
+
+
+<br/>
+
+### Scaling multi-agent systems for production traffic
+
+<br/>
+
+```shell
+$ docker compose up -d --scale searcher=3
+```
+
+<br/>
+
+```shell
+$ docker compose up -d --scale searcher=3 --scale analyzer=2
+```
+
+<br/>
+
+```shell
+$ docker compose up -d --scale searcher=3 --scale analyzer=2 --scale writer=2
+```
+
+<br/>
+
+```shell
+$ docker compose ps
+```
