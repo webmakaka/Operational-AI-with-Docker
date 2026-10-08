@@ -88,7 +88,7 @@ This allows agents to remain stateless and enables async processing.
 
 <br/>
 
-### Scaling multi-agent systems for production traffic
+## Scaling multi-agent systems for production traffic
 
 <br/>
 
@@ -112,4 +112,25 @@ $ docker compose up -d --scale searcher=3 --scale analyzer=2 --scale writer=2
 
 ```shell
 $ docker compose ps
+```
+
+<br/>
+
+### Testing concurrent requests
+
+<br/>
+
+```shell
+$ for i in {1..5}; do
+           curl -X POST http://localhost:8080/api/research \
+                      -H "Content-Type: application/json" \
+                      -d "{\"question\": \"Research topic $i\"}" &
+           done
+wait
+```
+
+<br/>
+
+```shell
+$ docker compose logs searcher-1 searcher-2 searcher-3 | grep "Searching:"
 ```
