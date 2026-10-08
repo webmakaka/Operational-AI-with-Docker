@@ -8,7 +8,7 @@ A hierarchical multi-agent system that coordinates specialized AI agents to answ
 ┌─────────────────────────────────────────┐
 │         Coordinator Agent               │
 │    (Plans & orchestrates workflow)      │
-│         Model: qwen3 (8B)              │
+│         Model: qwen3 (8B)               │
 └──────────┬──────────────────────────────┘
            │
     ┌──────┴──────┬──────────────┐
