@@ -68,4 +68,4 @@ https://github.com/PacktPublishing/Operational-AI-with-Docker
 
 <br/>
 
-<a href="https://agenticdev.ru/">Бесплатный клуб на тему "поговорить о AI разработке". Встречи по понедельникам в 20-00 по Мск в заблокированном Google Meet</a>
+<a href="https://agenticdev.ru/">Бесплатный клуб для общения об AI-разработке. Встречаемся по понедельникам в 20:00 по московскому времени в Google Meet.</a>
