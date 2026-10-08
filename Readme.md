@@ -1,4 +1,4 @@
-# [Book] [Ajeet Singh Raina, Harsh Manvar] Практическое внедрение ИИ с Docker: LLMOps, агенты и мультимодельные системы на Docker и Kubernetes [ENG, 2026]
+# [Книга] [Ajeet Singh Raina, Harsh Manvar] Практическое внедрение ИИ с Docker: LLMOps, агенты и мультимодельные системы на Docker и Kubernetes [ENG, 2026]
 
 <img src="./img/Operational-AI-with-Docker-Cover.webp" alt="Operational AI with Docker" height="512px" align="right">
 
