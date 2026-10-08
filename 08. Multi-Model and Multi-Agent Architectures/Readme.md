@@ -13,3 +13,5 @@ In this section, we're going to build a research assistant that can actually sea
 <img src="..//img/pic08-01.png" alt="Multi-Model and Multi-Agent Architectures">
 
 <br/>
+
+This is a real multi-agent system. Each agent has a specific job, uses the right model for that job, and can be scaled independently.
