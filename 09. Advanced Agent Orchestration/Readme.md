@@ -26,6 +26,8 @@ $ docker sandbox --help
 - For kagent stuff: kubectl, kind, Helm 3
 - At least one API key (OpenAI, Anthropic, or Gemini)
 
+<br/>
+
 ## Layout
 
 ```
@@ -34,6 +36,8 @@ docker-agent/  Docker Agent YAML configs (run with: cagent run <file>)
 kagent/        Kubernetes manifests for kagent
 ```
 
+<br/>
+
 ## Quick start
 
 ```bash
@@ -41,7 +45,7 @@ kagent/        Kubernetes manifests for kagent
 $ docker sandbox run claude ~/my-project
 
 # Run a cagent example
-$ cd docker-agent/01-pirate-assistant
+$ cd 03. kagent/01-pirate-assistant
 $ docker agent run agents.yaml
 
 # Deploy kagent on a local cluster
