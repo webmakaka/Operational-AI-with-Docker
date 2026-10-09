@@ -40,16 +40,25 @@ kagent/        Kubernetes manifests for kagent
 
 ## Quick start
 
-```bash
+```shell
 # Spin up a sandbox
 $ docker sandbox run claude ~/my-project
+```
 
+<br/>
+
+
+```shell
 # Run a cagent example
-$ cd 03. kagent/01-pirate-assistant
+$ cd 02. docker-agent/01-pirate-assistant
 $ docker agent run agents.yaml
+```
 
+<br/>
+
+```shell
 # Deploy kagent on a local cluster
-$ cd kagent
+$ cd 03. kagent
 $ kind create cluster --config kind-cluster.yaml
 $ bash install-kagent.sh
 $ kubectl apply -f 03-devops-assistant/
