@@ -136,6 +136,26 @@ $ docker agent run code-reviewer.yaml
 $ docker agent serve api agents.yaml
 ```
 
+<br/>
+
+```shell
+// Specify a custom port
+$ docker agent serve api agents.yaml --listen :8080
+```
+
+<br/>
+
+```shell
+// Other services can now call your agent
+# POST http://localhost:8080/v1/chat/completions
+```
+
+<br/>
+
+```shell
+// Run as an MCP server (your agent becomes a tool for other agents):
+$ docker agent serve mcp agents.yaml
+```
 
 <br/>
 
