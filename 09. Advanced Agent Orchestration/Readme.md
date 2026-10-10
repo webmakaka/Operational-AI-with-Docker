@@ -109,7 +109,6 @@ $ docker agent run agents.yaml
 
 ### Sharing agents via Docker Hub
 
-
 <br/>
 
 ```shell
@@ -155,6 +154,14 @@ $ docker agent serve api agents.yaml --listen :8080
 ```shell
 // Run as an MCP server (your agent becomes a tool for other agents):
 $ docker agent serve mcp agents.yaml
+```
+
+<br/>
+
+### Generating agents with AI
+
+```shell
+$ docker agent new "Create an agent that reviews pull requests, checks for security issues, and suggests improvements"
 ```
 
 <br/>
