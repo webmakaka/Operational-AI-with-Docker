@@ -21,7 +21,7 @@
 
 <br/>
 
-## Docker Sandbox
+## 01. Docker Sandbox
 
 <br/>
 
@@ -40,7 +40,7 @@ $ docker sandbox run claude ~/my-project
 
 <br/>
 
-## Docker Agent
+## 02. Docker Agent
 
 <br/>
 
@@ -104,7 +104,7 @@ $ docker agent run agents.yaml
 
 <br/>
 
-## Kubernetes-native orchestration with kagent
+## 03. Kubernetes-native orchestration with kagent
 
 <br/>
 
