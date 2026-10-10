@@ -14,9 +14,9 @@
 ## Layout
 
 ```
-sandboxes/     Docker Sandboxes commands (run interactively)
-docker-agent/  Docker Agent YAML configs (run with: cagent run <file>)
-kagent/        Kubernetes manifests for kagent
+01. sandboxes/     Docker Sandboxes commands (run interactively)
+02. docker-agent/  Docker Agent YAML configs (run with: cagent run <file>)
+03. kagent/        Kubernetes manifests for kagent
 ```
 
 <br/>
@@ -38,17 +38,6 @@ $ docker sandbox --help
 $ docker sandbox run claude ~/my-project
 ```
 
-
-<br/>
-
-## What you need
-
-- Docker Desktop 4.58+ (for Sandboxes)
-- Docker Agent CLI - `brew install docker/tap/docker-agent`
-- For kagent stuff: kubectl, kind, Helm 3
-- At least one API key (OpenAI, Anthropic, or Gemini)
-
-
 <br/>
 
 ## Docker Agent
@@ -56,7 +45,6 @@ $ docker sandbox run claude ~/my-project
 <br/>
 
 https://github.com/docker/docker-agent/releases
-
 
 <br/>
 
