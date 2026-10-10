@@ -319,25 +319,33 @@ For distributed tracing across multi-agent workflows, deploy Jaeger:
 <br/>
 
 ```shell
-cat << 'EOF' > jaeger.yaml
+$ cat << 'EOF' > jaeger.yaml
 provisionDataStore:
-cassandra: false
+  cassandra: false
 allInOne:
-enabled: true
+  enabled: true
 storage:
-type: memory
+  type: memory
 agent:
-enabled: false
+  enabled: false
 collector:
-enabled: false
+  enabled: false
 query:
-enabled: false
+  enabled: false
 EOF
+```
 
-helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
-helm repo update
+<br/>
 
-helm upgrade --install jaeger jaegertracing/jaeger \
+```shell
+$ helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+$ helm repo update
+```
+
+<br/>
+
+```shell
+$ helm upgrade --install jaeger jaegertracing/jaeger \
 --namespace jaeger \
 --create-namespace \
 --values jaeger.yaml \
@@ -350,10 +358,11 @@ helm upgrade --install jaeger jaegertracing/jaeger \
 Access the Jaeger UI:
 
 ```shell
-export POD_NAME=$(kubectl get pods --namespace jaeger \
+$ export POD_NAME=$(kubectl get pods --namespace jaeger \
 -l "app.kubernetes.io/instance=jaeger,app.kubernetes.io/component=all-in-one" \
 -o jsonpath="{.items[0].metadata.name}")
-kubectl port-forward --namespace jaeger $POD_NAME 16686:16686 &
+
+$ kubectl port-forward --namespace jaeger $POD_NAME 16686:16686 &
 ```
 
 <br/>
