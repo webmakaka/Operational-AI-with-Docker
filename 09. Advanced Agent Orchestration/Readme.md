@@ -106,22 +106,6 @@ $ docker agent run agents.yaml
 
 ## Kubernetes-native orchestration with kagent
 
-```shell
-$ cat <<EOF | kind create cluster --config=-
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-- role: control-plane
-- role: worker
-- rol
-```
-
-<br/>
-
-```shell
-$ kubectl get nodes
-```
-
 <br/>
 
 ```shell
@@ -129,5 +113,55 @@ $ kubectl get nodes
 $ cd 03. kagent
 $ kind create cluster --config kind-cluster.yaml
 $ bash install-kagent.sh
+```
+
+<br/>
+
+```shell
+$ kagent version
+```
+
+<br/>
+
+```shell
 $ kubectl apply -f 03-devops-assistant/
+```
+
+<br/>
+
+```shell
+$ kagent invoke -t "What pods are running in the kagent namespace?" --agent k8s-agent
+```
+
+<br/>
+
+
+```shell
+$ kubectl -n kagent port-forward service/kagent-ui 8080:8080
+```
+
+<br/>
+
+Then open http://localhost:8080 in your browser.
+
+<br/>
+
+### Building multi-agent architectures
+
+<br/>
+
+```shell
+$ kubectl apply -f 02-ops-team/
+$ kagent get agent | grep -E "ops-coordinator|log-analyzer|metrics-checker"
+$ kagent invoke -t "Check for any pod errors in the kagent namespace" --agent ops-coordinator
+```
+
+<br/>
+
+### Deploying MCP servers with kmcp
+
+<br/>
+
+```shell
+$ curl -fsSL https://raw.githubusercontent.com/kagent-dev/kmcp/refs/heads/main/scripts/get-kmcp.sh | bash
 ```
