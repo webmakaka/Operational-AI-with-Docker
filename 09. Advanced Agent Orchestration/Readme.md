@@ -208,3 +208,203 @@ $ kubectl create secret generic mcp-credentials \
 
 ### Autoscaling and resource optimization
 
+
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: log-analyzer-hpa
+  namespace: kagent
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: log-analyzer
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+```
+
+<br/>
+
+```
+$ kubectl get hpa -n kagent
+```
+
+<br/>
+
+```shell
+apiVersion: kagent.dev/v1alpha2
+kind: Agent
+metadata:
+  name: log-analyzer
+  namespace: kagent
+spec:
+  description: "Analyzes Kubernetes logs for issues"
+  type: Declarative
+  declarative:
+    modelConfig: default-model-config
+    systemMessage: |
+      Analyze Kubernetes pod logs to identify errors,
+      warnings, and anomalies. Report findings concisely.
+    deployment:
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "512Mi"
+        limits:
+          cpu: "2"
+          memory: "2Gi"
+    tools:
+      - type: Mcpserver
+        mcpServer:
+          name: kagent-tool-server
+          kind: RemoteMCPServer
+          toolNames:
+            - k8s_get_pod_logs
+            - k8s_get_events
+```
+
+<br/>
+
+### Observability with Prometheus and tracing
+
+
+<br/>
+
+```shell
+$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+$ helm repo update
+```
+
+<br/>
+
+```shell
+$ helm install monitoring prometheus-community/kube-prometheus-stack\
+--namespace monitoring\
+--create-namespace
+```
+
+<br/>
+
+```shell
+$ kubectl get pods -n monitoring
+```
+
+<br/>
+
+```shell
+$ kubectl --namespace monitoring get secrets monitoring-grafana \
+-o jsonpath="{.data.admin-password}" | base64 -d; echo
+```
+
+<br/>
+
+```shell
+$ kubectl port-forward svc/monitoring-grafana 3000:80 -n monitoring
+```
+
+Open http://localhost:3000
+
+<br/>
+
+For distributed tracing across multi-agent workflows, deploy Jaeger:
+
+<br/>
+
+```shell
+cat << 'EOF' > jaeger.yaml
+provisionDataStore:
+cassandra: false
+allInOne:
+enabled: true
+storage:
+type: memory
+agent:
+enabled: false
+collector:
+enabled: false
+query:
+enabled: false
+EOF
+
+helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+helm repo update
+
+helm upgrade --install jaeger jaegertracing/jaeger \
+--namespace jaeger \
+--create-namespace \
+--values jaeger.yaml \
+--version 4.4.7
+```
+
+
+<br/>
+
+Access the Jaeger UI:
+
+```shell
+export POD_NAME=$(kubectl get pods --namespace jaeger \
+-l "app.kubernetes.io/instance=jaeger,app.kubernetes.io/component=all-in-one" \
+-o jsonpath="{.items[0].metadata.name}")
+kubectl port-forward --namespace jaeger $POD_NAME 16686:16686 &
+```
+
+<br/>
+
+Open http://localhost:16686
+
+<br/>
+
+Generate tracing data by invoking an agent:
+
+```shell
+$ kagent invoke -t "What pods are running in the kagent namespace?" --agent k8s-agent
+```
+
+<br/>
+
+### Network policies for security isolation
+
+<br/>
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: agent-isolation
+  namespace: kagent
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: k8s-agent
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: kagent
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kagent
+```
+
+<br/>
+
+```
+$ kubectl get pods -n kagent --show-labels | grep k8s-agent
+```
+
+<br/>
+
+## Choosing the right orchestration tool
