@@ -11,23 +11,6 @@
 
 <br/>
 
-```shell
-$ docker sandbox --help
-```
-
-Внутри изолированной среды агент полностью автономен. Он может устанавливать системные пакеты, изменять файлы конфигурации, запускать службы и даже использовать Docker — и всё это без влияния на основную систему.
-
-<br/>
-
-## What you need
-
-- Docker Desktop 4.58+ (for Sandboxes)
-- Docker Agent CLI - `brew install docker/tap/docker-agent`
-- For kagent stuff: kubectl, kind, Helm 3
-- At least one API key (OpenAI, Anthropic, or Gemini)
-
-<br/>
-
 ## Layout
 
 ```
@@ -38,15 +21,88 @@ kagent/        Kubernetes manifests for kagent
 
 <br/>
 
-## Quick start
+## Docker Sandbox
+
+<br/>
+
+```shell
+$ docker sandbox --help
+```
+
+Внутри изолированной среды агент полностью автономен. Он может устанавливать системные пакеты, изменять файлы конфигурации, запускать службы и даже использовать Docker — и всё это без влияния на основную систему.
+
+<br/>
 
 ```shell
 // Spin up a sandbox
 $ docker sandbox run claude ~/my-project
 ```
 
+
 <br/>
 
+## What you need
+
+- Docker Desktop 4.58+ (for Sandboxes)
+- Docker Agent CLI - `brew install docker/tap/docker-agent`
+- For kagent stuff: kubectl, kind, Helm 3
+- At least one API key (OpenAI, Anthropic, or Gemini)
+
+
+<br/>
+
+## Docker Agent
+
+<br/>
+
+https://github.com/docker/docker-agent/releases
+
+
+<br/>
+
+```shell
+$ cd ~/tmp
+$ wget https://github.com/docker/docker-agent/releases/download/v1.150.0/docker-agent-linux-amd64
+$ mkdir -p ~/.docker/cli-plugins
+$ mv docker-agent-linux-amd64 ~/.docker/cli-plugins/
+$ mv ~/.docker/cli-plugins/docker-agent-linux-amd64 ~/.docker/cli-plugins/docker-agent
+$ chmod +x ~/.docker/cli-plugins/docker-agent
+```
+
+<br/>
+
+```shell
+$ docker agent version
+
+Welcome to docker agent! 🚀
+
+For any feedback, please visit: https://docker.qualtrics.com/jfe/form/SV_cNsCIg92nQemlfw
+
+We collect anonymous usage data to help improve docker agent. To disable:
+  - Set environment variable: TELEMETRY_ENABLED=false
+
+docker agent version v1.150.0
+Commit: 5277e7842058fc3fbb9943a6e88bc05a1c8e6fe2
+```
+
+
+<br/>
+
+```shell
+// Option 1: OpenAI
+$ export OPENAI_API_KEY=sk-your-key-here
+
+// Option 2: Anthropic
+$ export ANTHROPIC_API_KEY=sk-ant-your-key-here
+
+// Option 3: Google Gemini
+$ export GEMINI_API_KEY=your-key-here
+
+// Option 4: Docker Model Runner (free, local)
+// No API key needed - uses your local DMR instance
+```
+
+<br/>
 
 ```shell
 // Run a cagent example
@@ -54,23 +110,18 @@ $ cd 02. docker-agent/01-pirate-assistant
 $ docker agent run agents.yaml
 ```
 
+
+
+
+
 <br/>
 
+## Kubernetes
+
 ```shell
-# Deploy kagent on a local cluster
+// Deploy kagent on a local cluster
 $ cd 03. kagent
 $ kind create cluster --config kind-cluster.yaml
 $ bash install-kagent.sh
 $ kubectl apply -f 03-devops-assistant/
-```
-
-
-<br/>
-
-### Declarative agent teams with Docker Agent
-
-<br/>
-
-```shell
-$ docker agent version
 ```
