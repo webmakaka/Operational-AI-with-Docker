@@ -100,6 +100,41 @@ $ docker agent run agents.yaml
 
 
 
+<br/>
+
+### Integrating external tools with MCP
+
+
+<br/>
+
+### Sharing agents via Docker Hub
+
+
+<br/>
+
+```shell
+// Push an agent team to Docker Hub
+$ docker agent share push agents.yaml docker.io/yourusername/research-team:v1.0
+```
+
+<br/>
+
+```shell
+// Pull and run someone else's agent
+$ docker agent share pull docker.io/someuser/code-reviewer:latest
+$ docker agent run code-reviewer.yaml
+```
+
+<br/>
+
+### Running agents as API servers and MCP tools
+
+<br/>
+
+```shell
+// Run as an HTTP API server
+$ docker agent serve api agents.yaml
+```
 
 
 <br/>
