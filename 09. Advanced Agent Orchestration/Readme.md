@@ -41,7 +41,7 @@ kagent/        Kubernetes manifests for kagent
 ## Quick start
 
 ```shell
-# Spin up a sandbox
+// Spin up a sandbox
 $ docker sandbox run claude ~/my-project
 ```
 
@@ -49,7 +49,7 @@ $ docker sandbox run claude ~/my-project
 
 
 ```shell
-# Run a cagent example
+// Run a cagent example
 $ cd 02. docker-agent/01-pirate-assistant
 $ docker agent run agents.yaml
 ```
