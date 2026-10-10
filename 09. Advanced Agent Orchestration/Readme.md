@@ -104,7 +104,25 @@ $ docker agent run agents.yaml
 
 <br/>
 
-## Kubernetes
+## Kubernetes-native orchestration with kagent
+
+```shell
+$ cat <<EOF | kind create cluster --config=-
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+- rol
+```
+
+<br/>
+
+```shell
+$ kubectl get nodes
+```
+
+<br/>
 
 ```shell
 // Deploy kagent on a local cluster
