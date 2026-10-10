@@ -11,16 +11,6 @@
 
 <br/>
 
-## Layout
-
-```
-01. sandboxes/     Docker Sandboxes commands (run interactively)
-02. docker-agent/  Docker Agent YAML configs (run with: cagent run <file>)
-03. kagent/        Kubernetes manifests for kagent
-```
-
-<br/>
-
 ## 01. Docker Sandbox
 
 <br/>
