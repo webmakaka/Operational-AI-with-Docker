@@ -63,3 +63,14 @@ $ kind create cluster --config kind-cluster.yaml
 $ bash install-kagent.sh
 $ kubectl apply -f 03-devops-assistant/
 ```
+
+
+<br/>
+
+### Declarative agent teams with Docker Agent
+
+<br/>
+
+```shell
+$ docker agent version
+```
