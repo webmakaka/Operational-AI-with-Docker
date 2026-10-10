@@ -165,3 +165,46 @@ $ kagent invoke -t "Check for any pod errors in the kagent namespace" --agent op
 ```shell
 $ curl -fsSL https://raw.githubusercontent.com/kagent-dev/kmcp/refs/heads/main/scripts/get-kmcp.sh | bash
 ```
+
+<br/>
+
+```shell
+$ kmcp deploy package \
+    --deployment-name my-mcp-server \
+    --manager npx \
+    --args @modelcontextprotocol/server-everything \
+    --namespace kagent
+```
+
+or
+
+```yaml
+apiVersion: kagent.dev/v1alpha
+kind: MCPServer
+metadata:
+  name: mcp-website-fetcher
+  namespace: kagent
+spec:
+  deployment:
+    args:
+      - mcp-server-fetch
+    cmd: uvx
+    port: 3000
+    stdioTransport: {}
+  transportType: stdio
+```
+
+<br/>
+
+```
+// For secrets management, use Kubernetes Secrets:
+$ kubectl create secret generic mcp-credentials \
+    --from-literal=github-token=ghp_your_token \
+    --from-literal=slack-token=xoxb-your-token \
+    -n kagent
+```
+
+<br/>
+
+### Autoscaling and resource optimization
+
