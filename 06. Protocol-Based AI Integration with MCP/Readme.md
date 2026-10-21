@@ -11,14 +11,14 @@ https://registry.modelcontextprotocol.io/
 ```
 $ mkdir -p ~/.docker/cli-plugins/
 
-$ curl -fsSL https://github.com/docker/mcp-gateway/releases/download/v0.44.1/docker-mcp-linux-amd64.tar.gz | tar -xz -C ~/.docker/cli-plugins/
+$ curl -fsSL https://github.com/docker/mcp-gateway/releases/download/v0.44.2/docker-mcp-linux-amd64.tar.gz | tar -xz -C ~/.docker/cli-plugins/
 ```
 
 <br/>
 
 ```shell
 $ docker mcp --version
-v0.44.1
+v0.44.2
 ```
 
 <br/>
